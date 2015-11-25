@@ -18,14 +18,14 @@ import org.springframework.web.servlet.view.JstlView;
 public class WebAppConfig extends WebMvcConfigurerAdapter{
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/pages/**").addResourceLocations("/pages/");
+        registry.addResourceHandler("/assets/**").addResourceLocations("/assets/");
     }
 
     @Bean
     public InternalResourceViewResolver setupVR() {
         InternalResourceViewResolver ir = new InternalResourceViewResolver();
 
-        ir.setPrefix("/pages/");
+        ir.setPrefix("/assets/");
         ir.setSuffix(".jsp");
         ir.setViewClass(JstlView.class);
 
