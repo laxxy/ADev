@@ -11,6 +11,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
@@ -27,7 +28,7 @@ public class DataConfig {
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
 
         driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306");
+        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/db_one");
         driverManagerDataSource.setUsername("root");
         driverManagerDataSource.setPassword("root");
         return driverManagerDataSource;
@@ -52,9 +53,11 @@ public class DataConfig {
     }
 
     @Bean
-    public JpaTransactionManager transactionManager() {
+    public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+
         JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
+        transactionManager.setEntityManagerFactory(entityManagerFactory);
+
         return transactionManager;
     }
 

@@ -20,7 +20,7 @@ public class Lot {
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name= "increment", strategy= "increment")
     @Column(name = "id")
-    private int id;
+    private long id;
     @Column(name = "lot_name")
     private String lotName;
     @Column(name = "lot_info")
@@ -48,7 +48,7 @@ public class Lot {
         bidAll = new TreeMap<User, Double>();
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
