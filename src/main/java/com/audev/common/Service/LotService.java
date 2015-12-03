@@ -12,4 +12,5 @@ public interface LotService {
     public List<Lot> getAll();
     public void deleteOne(long id);
     public void updateOne(long id);
+    public void addOne(Lot lot);
 }
