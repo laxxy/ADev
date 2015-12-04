@@ -14,64 +14,13 @@
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,700italic,900,400italic,300italic' rel='stylesheet' type='text/css'>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="<c:url value="/assets/main/js/jquery.sticky.js"/>"></script>
+    <script src="<c:url value="/assets/main/js/ajax.js"/>"></script>
     <script>
         $(window).load(function(){
             $("#menu").sticky({ topSpacing: 0 });
         });
     </script>
-    <script>
-        jQuery(document).ready(function($) {
-
-            $("#searchform").submit(function(event) {
-
-                // Disble the search button
-                enableSearchButton(false);
-
-                // Prevent the form from submitting via the browser.
-                event.preventDefault();
-
-                searchViaAjax();
-
-            });
-
-        });
-
-        function searchViaAjax() {
-
-            var search = {};
-            search["searchString"] = $("#searchinput").val();
-
-            $.ajax({
-                type : "POST",
-                contentType : "application/json",
-                url : "/search",
-                data : JSON.stringify(search),
-                dataType : 'json',
-                timeout : 100000,
-                success : function(data) {
-                    display(data);
-                },
-                error : function(e) {
-                    //console.log("ERROR: ", e);
-                    display(e);
-                },
-                done : function(e) {
-                    //console.log("DONE");
-                    enableSearchButton(true);
-                }
-            });
-
-        }
-
-        function enableSearchButton(flag) {
-            $("#btnsearch").prop("disabled", flag);
-        }
-
-        function display(data) {
-            var json = "<pre>" + JSON.stringify(data, null, 4) + "</pre>";
-            $('#feedback').html(json);
-        }
-    </script>
+    <script></script>
 </head>
 <body>
 <div class="container-fluid banner text-center" id="banner">
