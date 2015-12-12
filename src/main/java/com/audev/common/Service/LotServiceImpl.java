@@ -18,7 +18,7 @@ public class LotServiceImpl implements LotService {
     private LotRepository lotRepository;
 
     public Lot getOne(long id) {
-        return lotRepository.getOne(id);
+        return lotRepository.findOne(id);
     }
 
     public List<Lot> getAll() {

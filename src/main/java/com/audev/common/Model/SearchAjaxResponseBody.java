@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 /**
  * Created by cosxt on 25.11.2015.
  */
-public class AjaxResponseBody {
+public class SearchAjaxResponseBody {
 
     @JsonView(com.audev.common.Views.JsonView.Public.class)
 

@@ -15,6 +15,8 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="<c:url value="/assets/main/js/jquery.sticky.js"/>"></script>
   <script src="<c:url value="/assets/main/js/ajax.js"/>"></script>
+  <script src="<c:url value="/assets/main/js/ajax.req.js"/>"></script>
+  <script src="<c:url value="/assets/main/js/jquery.bootpag.min.js"/>"></script>
   <script>
     $(window).load(function(){
       $("#menu").sticky({ topSpacing: 0 });
@@ -87,6 +89,23 @@
       </div>
     </div>
   </div>
+</div>
+<div>
+  <div id="page-selection"></div>
+  <div id="content">Dynamic Content goes here</div>
+  <script>
+
+    var datain;
+
+    getData();
+
+    $('#page-selection').bootpag({
+      total: countin,
+      maxVisible: 10
+    }).on("page", function(event, num){
+      $("#content").html("Insert content"); // some ajax content loading...
+    });
+  </script>
 </div>
 </body>
 </html>

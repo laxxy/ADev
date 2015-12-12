@@ -19,13 +19,14 @@ public class WebAppConfig extends WebMvcConfigurerAdapter{
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/assets/**").addResourceLocations("/assets/");
+        registry.addResourceHandler("/pages/**").addResourceLocations("/pages/");
     }
 
     @Bean
     public InternalResourceViewResolver setupVR() {
         InternalResourceViewResolver ir = new InternalResourceViewResolver();
 
-        ir.setPrefix("/assets/");
+        ir.setPrefix("/pages/");
         ir.setSuffix(".jsp");
         ir.setViewClass(JstlView.class);
 
