@@ -1,21 +1,25 @@
 /**
- * Created by cosxt on 12.12.2015.
+ * num - is a number of selected page
+ * on success data goes to content div
  */
-function getData() {
+function getData(num) {
 
-    var total;
+    var number = {};
+
+    if (jQuery.type(num) === "undefined") {
+        number["pageNumber"] = 1;
+    }
+    else number["pageNumber"] = num;
 
     $.ajax({
         type : "POST",
         contentType : "application/json",
-        url : "/filter/1",
-        data : JSON.stringify(""),
+        url : "/filter/atest",
+        data : JSON.stringify(number),
         dataType : 'json',
         timeout : 100000,
         success : function(data) {
-            //display(data);
-            countin = data.dataToView;
-            alert(datain)
+            $('#content').html(JSON.stringify(data));
         },
         error : function(e) {
             //console.log("ERROR: ", e);
@@ -26,7 +30,7 @@ function getData() {
         }
     });
 }
-function display(data) {
+function display(data) { //not used
     var json = "<pre>" + JSON.stringify(data, null, 4) + "</pre>";
     $('#content').html(json);
 }

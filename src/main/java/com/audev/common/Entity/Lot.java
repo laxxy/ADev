@@ -3,6 +3,7 @@ package com.audev.common.Entity;
 import com.audev.common.Entity.Enums.Category;
 import com.audev.common.Entity.Enums.Delivery;
 import com.audev.common.Entity.Enums.Pay;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.*;
@@ -15,6 +16,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Lot")
 public class Lot {
+
+    public interface Public{};
 
     @Id
     @GeneratedValue(generator = "increment")
@@ -39,7 +42,6 @@ public class Lot {
     private double bidBuyNow;
     private transient Set<Delivery> bidDelivery;
     private transient Set<Pay> bidPay;
-    //bid history
     private transient Map<User, Double> bidAll;
 
     public Lot() {
@@ -52,6 +54,7 @@ public class Lot {
         return id;
     }
 
+    @JsonView(Public.class)
     public String getLotName() {
         return lotName;
     }
@@ -60,6 +63,7 @@ public class Lot {
         this.lotName = lotName;
     }
 
+    @JsonView(Public.class)
     public String getLotInfo() {
         return lotInfo;
     }
@@ -68,6 +72,7 @@ public class Lot {
         this.lotInfo = lotInfo;
     }
 
+    @JsonView(Public.class)
     public Date getDateOfStart() {
         return dateOfStart;
     }
@@ -76,6 +81,7 @@ public class Lot {
         this.dateOfStart = dateOfStart;
     }
 
+    @JsonView(Public.class)
     public Date getDateOfEnd() {
         return dateOfEnd;
     }
@@ -92,6 +98,7 @@ public class Lot {
         this.category = category;
     }
 
+    @JsonView(Public.class)
     public double getBidInitial() {
         return bidInitial;
     }
@@ -100,6 +107,7 @@ public class Lot {
         this.bidInitial = bidInitial;
     }
 
+    @JsonView(Public.class)
     public double getBidCurrent() {
         return bidCurrent;
     }
@@ -108,6 +116,7 @@ public class Lot {
         this.bidCurrent = bidCurrent;
     }
 
+    @JsonView(Public.class)
     public double getBidBuyNow() {
         return bidBuyNow;
     }
@@ -139,4 +148,11 @@ public class Lot {
     public void setBidAll(Map<User, Double> bidAll) {
         this.bidAll = bidAll;
     }
+
+    /*@Override
+    public String toString() {
+        return "Lot[name:" + lotName + ", info:" + lotInfo + ", dastart:" + dateOfStart +
+                ", daend:" + dateOfEnd + ", bidinit:" + bidInitial + ", bidcurrent:" +
+                bidCurrent + ", bidbuynow" + bidBuyNow + "]";
+    }*/
 }

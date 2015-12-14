@@ -94,16 +94,12 @@
   <div id="page-selection"></div>
   <div id="content">Dynamic Content goes here</div>
   <script>
-
-    var datain;
-
     getData();
-
     $('#page-selection').bootpag({
-      total: countin,
+      total: ${size},
       maxVisible: 10
     }).on("page", function(event, num){
-      $("#content").html("Insert content"); // some ajax content loading...
+      getData(num)
     });
   </script>
 </div>

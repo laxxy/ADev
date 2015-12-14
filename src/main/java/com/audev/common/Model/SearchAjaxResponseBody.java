@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonView;
  */
 public class SearchAjaxResponseBody {
 
-    @JsonView(com.audev.common.Views.JsonView.Public.class)
+    //@JsonView(com.audev.common.Views.JsonView.Public.class)
 
     private String message;
 

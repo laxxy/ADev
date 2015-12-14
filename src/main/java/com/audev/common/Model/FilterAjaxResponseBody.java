@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonView;
  */
 public class FilterAjaxResponseBody {
 
-    @JsonView(com.audev.common.Views.JsonView.Public.class)
+    //@JsonView(com.audev.common.Views.JsonView.Public.class)
 
     private String dataToView;
 

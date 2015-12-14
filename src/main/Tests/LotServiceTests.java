@@ -34,7 +34,7 @@ public class LotServiceTests {
     @Test
     public void tetstcc() {
 
-        /*Lot lot = new Lot();
+        Lot lot = new Lot();
         Date date = new Date();
         lot.setLotName("asd");
         lot.setDateOfStart(date);
@@ -42,6 +42,6 @@ public class LotServiceTests {
         lot.setDateOfEnd(date);
         lot.setBidInitial(20.00);
         lot.setLotInfo("asdasdasd");
-        lotService.addOne(lot);*/
+        lotService.addOne(lot);
     }
 }

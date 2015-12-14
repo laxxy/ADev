@@ -19,6 +19,7 @@ public class MainConfig implements WebApplicationInitializer {
         AnnotationConfigWebApplicationContext ct = new AnnotationConfigWebApplicationContext();
 
         ct.register(WebAppConfig.class);
+        ct.register(DataConfig.class);
 
         servletContext.addListener(new ContextLoaderListener(ct));
 

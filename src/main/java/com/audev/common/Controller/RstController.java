@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by cosxt on 25.11.2015.
  */
@@ -44,15 +47,14 @@ public class RstController {
         }
     }
 
-    @JsonView(com.audev.common.Views.JsonView.Public.class)
     @RequestMapping(value = "/filter/{input}")
-    public FilterAjaxResponseBody getFilterData(@PathVariable String input) {
+    @JsonView(Lot.Public.class)
+    public List<Lot> getFilterData(@PathVariable String input, @RequestBody String num) {
 
-        FilterAjaxResponseBody filterAjaxResponseBody = new FilterAjaxResponseBody();
+        List<Lot> list = new ArrayList<Lot>();
 
-        filterAjaxResponseBody.setCount("20");
-        filterAjaxResponseBody.setDataToView("20");
+            list.add(lotService.getOne(1));
 
-        return filterAjaxResponseBody;
+        return list;
     }
 }
