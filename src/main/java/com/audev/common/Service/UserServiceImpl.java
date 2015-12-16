@@ -34,4 +34,8 @@ public class UserServiceImpl implements UserService {
 
     public void addUser() {
     }
+
+    public User getUserByName(String s) {
+        return null;
+    }
 }

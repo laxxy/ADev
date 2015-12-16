@@ -1,6 +1,5 @@
 package com.audev.common.Entity;
 
-import com.audev.common.Entity.Enums.Category;
 import com.audev.common.Entity.Enums.Delivery;
 import com.audev.common.Entity.Enums.Pay;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -17,7 +16,7 @@ import javax.persistence.*;
 @Table(name = "Lot")
 public class Lot {
 
-    public interface Public{};
+    public interface Public{}
 
     @Id
     @GeneratedValue(generator = "increment")
@@ -32,7 +31,8 @@ public class Lot {
     private Date dateOfStart;
     @Column(name = "date_of_end")
     private Date dateOfEnd;
-    @Enumerated(EnumType.STRING)
+    @OneToOne(optional = false)
+    @JoinColumn(name = "category_id", unique = true, nullable = false, updatable = false)
     private Category category;
     @Column(name = "bid_initial")
     private double bidInitial;

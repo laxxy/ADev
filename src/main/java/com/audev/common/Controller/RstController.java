@@ -1,7 +1,6 @@
 package com.audev.common.Controller;
 
 import com.audev.common.Entity.Lot;
-import com.audev.common.Model.FilterAjaxResponseBody;
 import com.audev.common.Model.SearchAjaxResponseBody;
 import com.audev.common.Model.SearchCriteria;
 import com.audev.common.Service.LotService;
@@ -54,6 +53,7 @@ public class RstController {
         List<Lot> list = new ArrayList<Lot>();
 
             list.add(lotService.getOne(1));
+            list.add(lotService.getOne(2));
 
         return list;
     }

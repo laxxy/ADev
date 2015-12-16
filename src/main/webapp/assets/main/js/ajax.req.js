@@ -14,12 +14,12 @@ function getData(num) {
     $.ajax({
         type : "POST",
         contentType : "application/json",
-        url : "/filter/atest",
+        url : window.location.href,
         data : JSON.stringify(number),
         dataType : 'json',
         timeout : 100000,
         success : function(data) {
-            $('#content').html(JSON.stringify(data));
+            display(JSON.stringify(data));
         },
         error : function(e) {
             //console.log("ERROR: ", e);
@@ -31,6 +31,14 @@ function getData(num) {
     });
 }
 function display(data) { //not used
-    var json = "<pre>" + JSON.stringify(data, null, 4) + "</pre>";
-    $('#content').html(json);
+
+    var st = jQuery.parseJSON(data);
+    var jmString = "";
+    st.forEach(function(entry){
+        jmString = jmString +
+            "<div class=jumbotron>" +
+            "<h1>"+ entry.lotName +"</h1>" +
+            "</div>";
+    });
+    $('#content').html(jmString);
 }
