@@ -28,14 +28,15 @@ public class UserServiceImpl implements UserService {
         userRepository.delete(id);
     }
 
-    public void updateUser(User user) {
+    public void addUser(User user) {
         userRepository.save(user);
     }
 
-    public void addUser() {
+    public User getUserByName(String s) {
+        return userRepository.findByLogin(s);
     }
 
-    public User getUserByName(String s) {
-        return null;
+    public User getUserByEmail(String s) {
+        return userRepository.findByEmail(s);
     }
 }
