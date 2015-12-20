@@ -32,14 +32,14 @@ public class Lot {
     @Column(name = "date_of_end")
     private Date dateOfEnd;
     @OneToOne(optional = false)
-    @JoinColumn(name = "category_id", unique = true, nullable = false, updatable = false)
+    @JoinColumn(name = "cat_id", unique = true, nullable = false, updatable = false)
     private Category category;
-    @Column(name = "bid_initial")
-    private double bidInitial;
+    //@Column(name = "bid_initial")
+    //private double bidInitial;
     @Column(name = "bid_current")
     private double bidCurrent;
-    @Column(name = "bid_buy_now")
-    private double bidBuyNow;
+    //@Column(name = "bid_buy_now")
+    //private double bidBuyNow;
     private transient Set<Delivery> bidDelivery;
     private transient Set<Pay> bidPay;
     private transient Map<User, Double> bidAll;
@@ -98,14 +98,14 @@ public class Lot {
         this.category = category;
     }
 
-    @JsonView(Public.class)
+    /*@JsonView(Public.class)
     public double getBidInitial() {
         return bidInitial;
-    }
+    }*/
 
-    public void setBidInitial(double bidInitial) {
+    /*public void setBidInitial(double bidInitial) {
         this.bidInitial = bidInitial;
-    }
+    }*/
 
     @JsonView(Public.class)
     public double getBidCurrent() {
@@ -116,14 +116,14 @@ public class Lot {
         this.bidCurrent = bidCurrent;
     }
 
-    @JsonView(Public.class)
+    /*@JsonView(Public.class)
     public double getBidBuyNow() {
         return bidBuyNow;
-    }
+    }*/
 
-    public void setBidBuyNow(double bidBuyNow) {
+    /*public void setBidBuyNow(double bidBuyNow) {
         this.bidBuyNow = bidBuyNow;
-    }
+    }*/
 
     public Set<Delivery> getBidDelivery() {
         return bidDelivery;

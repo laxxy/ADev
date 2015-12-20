@@ -1,8 +1,10 @@
 package com.audev.common.Controller;
 
+import com.audev.common.Entity.Category;
 import com.audev.common.Entity.Enums.UserRole;
 import com.audev.common.Entity.Lot;
 import com.audev.common.Entity.User;
+import com.audev.common.Service.CategoryService;
 import com.audev.common.Service.LotService;
 import com.audev.common.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +33,31 @@ public class MainController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private CategoryService categoryService;
+
     @RequestMapping(value = "/")
     public String printMain() {
+
+
+
+            Category category = new Category();
+
+            Lot lot = new Lot();
+
+        lot.setLotName("asd");
+        lot.setDateOfStart(new Date());
+        lot.setBidCurrent(200);
+        lot.setLotInfo("asdadsasdasd");
+        lot.setCategory(category);
+
+            category.setLot(lot);
+            category.setName("test");
+
+            categoryService.addOne(category);
+
+            lotService.addOne(lot);
+
         return "index";
     }
 

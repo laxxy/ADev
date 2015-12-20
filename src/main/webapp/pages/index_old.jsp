@@ -14,7 +14,7 @@
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,700italic,900,400italic,300italic' rel='stylesheet' type='text/css'>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="<c:url value="/assets/main/js/jquery.sticky.js"/>"></script>
-    <script src="<c:url value="/assets/main/js/ajax.js"/>"></script>
+    <script src="<c:url value="/assets/core/js/ajax.js"/>"></script>
     <script>
         $(window).load(function(){
             $("#menu").sticky({ topSpacing: 0 });

@@ -9,7 +9,7 @@
   <link href="<c:url value="/assets/main/style.css"/>" rel="stylesheet">
   <link href="<c:url value="/assets/main/css/lot-info.css"/>" rel="stylesheet">
   <link href="<c:url value="/assets/main/css/bootstrap.min.css"/>" rel="stylesheet">
-  <script src="<c:url value="/assets/main/js/ajax.js"/>"></script>
+  <script src="<c:url value="/assets/core/js/ajax.js"/>"></script>
 
 </head>
 <body>

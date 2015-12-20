@@ -24,7 +24,7 @@ public class RstController {
     @Autowired
     private LotService lotService;
 
-    @JsonView(com.audev.common.Views.JsonView.Public.class)
+    //@JsonView(com.audev.common.Views.JsonView.Public.class)
     @RequestMapping(value = "/search")
     public SearchAjaxResponseBody getSearchResult(@RequestBody SearchCriteria searchCriteria) {
 

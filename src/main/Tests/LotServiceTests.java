@@ -40,7 +40,7 @@ public class LotServiceTests {
         lot.setDateOfStart(date);
         date.setTime(System.currentTimeMillis() + 30000000);
         lot.setDateOfEnd(date);
-        lot.setBidInitial(20.00);
+        //lot.setBidInitial(20.00);
         lot.setLotInfo("asdasdasd");
         lotService.addOne(lot);
     }

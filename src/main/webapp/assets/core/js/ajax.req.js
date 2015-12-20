@@ -36,9 +36,20 @@ function display(data) { //not used
     var jmString = "";
     st.forEach(function(entry){
         jmString = jmString +
-            "<div class=jumbotron>" +
-            "<h1>"+ entry.lotName +"</h1>" +
-            "</div>";
+            "<li class=media>" +
+                "<a class=pull-left href=#>"+
+                "<img class=media-object src='' alt=''>"+
+                "</a>"+
+                "<div class=media-body>"+
+                "<ul class=sinlge-post-meta>"+
+                "<li><i class='fa fa-user'></i>Janis Gallagher</li>"+
+                "<li><i class='fa fa-clock-o'></i> 1:33 pm</li>"+
+                "<li><i class='fa fa-calendar'></i>"+entry.bidCurrent+"</li>"+
+                "</ul>"+
+                "<p>"+entry.lotName+"<p>"+
+                "<a class='btn btn-primary' href=''><i class='fa fa-reply'></i>More</a>"+
+                "</div>"+
+                "</li>";
     });
     $('#content').html(jmString);
 }
