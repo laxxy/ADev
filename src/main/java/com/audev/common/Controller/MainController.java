@@ -3,6 +3,7 @@ package com.audev.common.Controller;
 import com.audev.common.Entity.Category;
 import com.audev.common.Entity.Enums.UserRole;
 import com.audev.common.Entity.Lot;
+import com.audev.common.Entity.SubCategory;
 import com.audev.common.Entity.User;
 import com.audev.common.Service.CategoryService;
 import com.audev.common.Service.LotService;
@@ -39,24 +40,14 @@ public class MainController {
     @RequestMapping(value = "/")
     public String printMain() {
 
+        Category category = new Category();
+        category.setName("test");
 
+        SubCategory subCategory = new SubCategory(category);
 
-            Category category = new Category();
+        category.getSubCategories().add(subCategory);
 
-            Lot lot = new Lot();
-
-        lot.setLotName("asd");
-        lot.setDateOfStart(new Date());
-        lot.setBidCurrent(200);
-        lot.setLotInfo("asdadsasdasd");
-        lot.setCategory(category);
-
-            category.setLot(lot);
-            category.setName("test");
-
-            categoryService.addOne(category);
-
-            lotService.addOne(lot);
+        categoryService.addOne(category);
 
         return "index";
     }

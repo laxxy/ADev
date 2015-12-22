@@ -1,0 +1,51 @@
+package com.audev.common.Entity;
+
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+
+/**
+ * Created by cosxt on 21.12.2015.
+ */
+@Entity
+@Table(name = "sub_category")
+public class SubCategory {
+
+    @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name= "increment", strategy= "increment")
+    private long id;
+    @Column(name = "name")
+    private String name;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cat_id", nullable = false)
+    private Category category;
+
+    public SubCategory() {
+
+    }
+
+    public SubCategory(Category category) {
+        this.category = category;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+}

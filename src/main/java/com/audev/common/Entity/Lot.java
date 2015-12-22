@@ -31,9 +31,8 @@ public class Lot {
     private Date dateOfStart;
     @Column(name = "date_of_end")
     private Date dateOfEnd;
-    @OneToOne(optional = false)
-    @JoinColumn(name = "cat_id", unique = true, nullable = false, updatable = false)
-    private Category category;
+
+    private transient Category category;
     //@Column(name = "bid_initial")
     //private double bidInitial;
     @Column(name = "bid_current")

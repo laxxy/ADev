@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * Created by cosxt on 16.12.2015.
@@ -17,16 +18,11 @@ public class Category {
     @GenericGenerator(name = "increment", strategy = "increment")
     @Column(name = "cat_id")
     private long id;
-    @OneToOne(optional = false)
-    private Lot lot;
     @Column(name = "name")
     private String name;
-    //@OneToMany(cascade = {CascadeType.ALL})
-    //@JoinColumn(name = "cat_id")
-    private transient ArrayList<Category> subCategory;
+    private ArrayList<SubCategory> subCategories = new ArrayList<SubCategory>();
 
-    public Category() {
-        subCategory = new ArrayList<Category>();
+    public Category(){
     }
 
     public long getId() {
@@ -41,19 +37,12 @@ public class Category {
         this.name = name;
     }
 
-    public ArrayList<Category> getSubCategory() {
-        return subCategory;
+    public ArrayList<SubCategory> getSubCategories() {
+        return subCategories;
     }
 
-    public void setSubCategory(ArrayList<Category> subCategory) {
-        this.subCategory = subCategory;
-    }
-
-    public Lot getLot() {
-        return lot;
-    }
-
-    public void setLot(Lot lot) {
-        this.lot = lot;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
+    public void setSubCategories(ArrayList<SubCategory> subCategories) {
+        this.subCategories = subCategories;
     }
 }
