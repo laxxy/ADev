@@ -7,6 +7,7 @@ import com.audev.common.Entity.SubCategory;
 import com.audev.common.Entity.User;
 import com.audev.common.Service.CategoryService;
 import com.audev.common.Service.LotService;
+import com.audev.common.Service.SubCategoryService;
 import com.audev.common.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,17 +38,23 @@ public class MainController {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private SubCategoryService subCategoryService;
+
     @RequestMapping(value = "/")
     public String printMain() {
 
         Category category = new Category();
         category.setName("test");
 
-        SubCategory subCategory = new SubCategory(category);
+        SubCategory subCategory = new SubCategory();
+
 
         category.getSubCategories().add(subCategory);
 
         categoryService.addOne(category);
+
+        subCategoryService.saveOne(subCategory);
 
         return "index";
     }
