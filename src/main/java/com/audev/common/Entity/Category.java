@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -16,11 +17,12 @@ public class Category {
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
-    @Column(name = "cat_id")
+    @Column(name = "category_id")
     private long id;
     @Column(name = "name")
     private String name;
-    private ArrayList<SubCategory> subCategories = new ArrayList<SubCategory>();
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "category")
+    private List<SubCategory> subCategories = new ArrayList<SubCategory>();
 
     public Category(){
     }
@@ -37,12 +39,11 @@ public class Category {
         this.name = name;
     }
 
-    public ArrayList<SubCategory> getSubCategories() {
+    public List<SubCategory> getSubCategories() {
         return subCategories;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
-    public void setSubCategories(ArrayList<SubCategory> subCategories) {
+    public void setSubCategories(List<SubCategory> subCategories) {
         this.subCategories = subCategories;
     }
 }

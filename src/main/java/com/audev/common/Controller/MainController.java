@@ -11,6 +11,7 @@ import com.audev.common.Service.SubCategoryService;
 import com.audev.common.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by cosxt on 04.12.2015.
@@ -43,19 +45,6 @@ public class MainController {
 
     @RequestMapping(value = "/")
     public String printMain() {
-
-        Category category = new Category();
-        category.setName("test");
-
-        SubCategory subCategory = new SubCategory();
-
-
-        category.getSubCategories().add(subCategory);
-
-        categoryService.addOne(category);
-
-        subCategoryService.saveOne(subCategory);
-
         return "index";
     }
 
@@ -85,7 +74,7 @@ public class MainController {
     @RequestMapping(value = "/filter/{input}", method = RequestMethod.GET)
     public String printFilterPage(@PathVariable String input, ModelMap modelMap) {
 
-        ArrayList<Lot> lotlist = new ArrayList<Lot>();
+        ArrayList<Lot> lotlist = new ArrayList<>();
 
         for (Lot h : lotService.getAll()) {
             if (h.getLotName().startsWith(input)) {

@@ -3,6 +3,8 @@ package com.audev.common.Entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by cosxt on 21.12.2015.
@@ -14,15 +16,17 @@ public class SubCategory {
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name= "increment", strategy= "increment")
+    @Column(name = "sub_id")
     private long id;
     @Column(name = "name")
     private String name;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cat_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id", nullable = false)
     private Category category;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "subCategory")
+    private List<Lot> lots = new ArrayList<Lot>();
 
     public SubCategory() {
-
     }
 
     public SubCategory(Category category) {
@@ -39,6 +43,14 @@ public class SubCategory {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Lot> getLots() {
+        return lots;
+    }
+
+    public void setLots(List<Lot> lots) {
+        this.lots = lots;
     }
 
     public Category getCategory() {

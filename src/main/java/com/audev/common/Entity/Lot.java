@@ -31,14 +31,15 @@ public class Lot {
     private Date dateOfStart;
     @Column(name = "date_of_end")
     private Date dateOfEnd;
-
-    private transient Category category;
     //@Column(name = "bid_initial")
     //private double bidInitial;
     @Column(name = "bid_current")
     private double bidCurrent;
     //@Column(name = "bid_buy_now")
     //private double bidBuyNow;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sub_id", nullable = false)
+    private SubCategory subCategory;
     private transient Set<Delivery> bidDelivery;
     private transient Set<Pay> bidPay;
     private transient Map<User, Double> bidAll;
@@ -47,6 +48,10 @@ public class Lot {
         bidDelivery = new HashSet<Delivery>();
         bidPay = new HashSet<Pay>();
         bidAll = new TreeMap<User, Double>();
+    }
+
+    public Lot(SubCategory subCategory) {
+        this.subCategory = subCategory;
     }
 
     public long getId() {
@@ -87,14 +92,6 @@ public class Lot {
 
     public void setDateOfEnd(Date dateOfEnd) {
         this.dateOfEnd = dateOfEnd;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 
     /*@JsonView(Public.class)
@@ -146,6 +143,14 @@ public class Lot {
 
     public void setBidAll(Map<User, Double> bidAll) {
         this.bidAll = bidAll;
+    }
+
+    public SubCategory getSubCategory() {
+        return subCategory;
+    }
+
+    public void setSubCategory(SubCategory subCategory) {
+        this.subCategory = subCategory;
     }
 
     /*@Override
