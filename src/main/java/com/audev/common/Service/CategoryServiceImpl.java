@@ -22,10 +22,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     public List<Category> getAll() {
-        ArrayList<Category> categories = new ArrayList<>();
-        categories.addAll(categoryRepository.findAll());
-
-        return categories;
+        return categoryRepository.findAll();
     }
 
     public Category getOneById(long id) {

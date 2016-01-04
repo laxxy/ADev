@@ -1,5 +1,6 @@
 package com.audev.common.Entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -13,6 +14,9 @@ import java.util.Set;
 @Entity
 @Table(name = "category")
 public class Category {
+
+    public interface CatView{}
+    public interface CatViewWithSubCategories extends CatView{}
 
     @Id
     @GeneratedValue(generator = "increment")
@@ -31,6 +35,7 @@ public class Category {
         return id;
     }
 
+    @JsonView(CatView.class)
     public String getName() {
         return name;
     }
@@ -39,6 +44,7 @@ public class Category {
         this.name = name;
     }
 
+    @JsonView(CatViewWithSubCategories.class)
     public List<SubCategory> getSubCategories() {
         return subCategories;
     }

@@ -30,7 +30,7 @@ function getData(num) {
         }
     });
 }
-function display(data) { //not used
+function display(data) {
 
     var st = jQuery.parseJSON(data);
     var jmString = "";

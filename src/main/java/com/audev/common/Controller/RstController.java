@@ -1,8 +1,11 @@
 package com.audev.common.Controller;
 
+import com.audev.common.Entity.Category;
 import com.audev.common.Entity.Lot;
+import com.audev.common.Entity.SubCategory;
 import com.audev.common.Model.SearchAjaxResponseBody;
 import com.audev.common.Model.SearchCriteria;
+import com.audev.common.Service.CategoryService;
 import com.audev.common.Service.LotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +26,9 @@ public class RstController {
 
     @Autowired
     private LotService lotService;
+
+    @Autowired
+    private CategoryService categoryService;
 
     //@JsonView(com.audev.common.Views.JsonView.Public.class)
     @RequestMapping(value = "/search")
@@ -56,5 +62,11 @@ public class RstController {
             list.add(lotService.getOne(2));
 
         return list;
+    }
+
+    @RequestMapping(value = "/category")
+    @JsonView(Category.CatViewWithSubCategories.class)
+    public List<Category> getCategory() {
+        return categoryService.getAll();
     }
 }

@@ -1,6 +1,12 @@
 import com.audev.common.Config.DataConfig;
+import com.audev.common.Entity.Category;
 import com.audev.common.Entity.Lot;
+import com.audev.common.Entity.SubCategory;
+import com.audev.common.Entity.User;
+import com.audev.common.Service.CategoryService;
 import com.audev.common.Service.LotService;
+import com.audev.common.Service.SubCategoryService;
+import com.audev.common.Service.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +29,11 @@ import java.util.Date;
 @WebAppConfiguration
 public class LotServiceTests {
 
-    @Resource
+    @Autowired
+    private CategoryService categoryService;
+    @Autowired
+    private SubCategoryService subCategoryService;
+    @Autowired
     private LotService lotService;
 
     @Before
@@ -34,14 +44,28 @@ public class LotServiceTests {
     @Test
     public void tetstcc() {
 
-        Lot lot = new Lot();
-        Date date = new Date();
-        lot.setLotName("asd");
-        lot.setDateOfStart(date);
-        date.setTime(System.currentTimeMillis() + 30000000);
-        lot.setDateOfEnd(date);
-        //lot.setBidInitial(20.00);
-        lot.setLotInfo("asdasdasd");
-        lotService.addOne(lot);
+        /*
+        //add data for test
+        for (int i = 0; i < 4; i++) {
+            Category category = new Category();
+            category.setName("Test: " + i);
+            SubCategory subCategory;
+            for (int j = 0; j < 10; j++) {
+                subCategory = new SubCategory(category);
+
+                subCategory.setName("inner test" + i);
+
+                category.getSubCategories().add(subCategory);
+
+                categoryService.addOne(category);
+
+                subCategoryService.saveOne(subCategory);
+            }
+        }*/
+
+        for (SubCategory subCategory : categoryService.getAll().get(0).getSubCategories()){
+            System.out.println(subCategory.getName());
+        }
+
     }
 }

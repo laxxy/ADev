@@ -17,7 +17,7 @@
 	<link href="<c:url value="/assets/core/css/responsive.css"/>" rel="stylesheet">
 </head><!--/head-->
 
-<body>
+<body onload="getCategory()">
 	<header id="header"><!--header-->
 		<div class="header_top"><!--header_top-->
 			<div class="container">
@@ -72,7 +72,7 @@
 				</div>
 			</div>
 		</div><!--/header-middle-->
-	
+
 		<div class="header-bottom"><!--header-bottom-->
 			<div class="container">
 				<div class="row">
@@ -86,25 +86,8 @@
 							</button>
 						</div>
 						<div class="mainmenu pull-left">
-							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="index.jsp" class="active">Home</a></li>
-								<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="shop.html">Products</a></li>
-										<li><a href="product-details.html">Product Details</a></li> 
-										<li><a href="checkout.html">Checkout</a></li> 
-										<li><a href="cart.html">Cart</a></li> 
-										<li><a href="login.jsp">Login</a></li>
-                                    </ul>
-                                </li> 
-								<li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="blog.html">Blog List</a></li>
-										<li><a href="blog-single.html">Blog Single</a></li>
-                                    </ul>
-                                </li> 
-								<li><a href="404.html">404</a></li>
-								<li><a href="contact-us.html">Contact</a></li>
+							<ul class="nav navbar-nav collapse navbar-collapse" id="category">
+
 							</ul>
 						</div>
 					</div>
@@ -591,5 +574,6 @@
 	<script src="<c:url value="/assets/core/js/price-range.js"/>"></script>
 	<script src="<c:url value="/assets/core/js/jquery.prettyPhoto.js"/>"></script>
 	<script src="<c:url value="/assets/core/js/main.js"/>"></script>
+	<script src="<c:url value="/assets/core/js/ajax.js"/>"></script>
 </body>
 </html>

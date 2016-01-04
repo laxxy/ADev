@@ -1,5 +1,6 @@
 package com.audev.common.Entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -24,7 +25,7 @@ public class SubCategory {
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "subCategory")
-    private List<Lot> lots = new ArrayList<Lot>();
+    private List<Lot> lots = new ArrayList<>();
 
     public SubCategory() {
     }
