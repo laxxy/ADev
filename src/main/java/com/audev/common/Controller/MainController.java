@@ -44,7 +44,10 @@ public class MainController {
     private SubCategoryService subCategoryService;
 
     @RequestMapping(value = "/")
-    public String printMain() {
+    public String printMain(Model model) {
+
+        model.addAttribute("category", categoryService.getAll());
+
         return "index";
     }
 
@@ -54,6 +57,11 @@ public class MainController {
         model.addAttribute(new User());
 
         return "login";
+    }
+
+    @RequestMapping(value = "/panel")
+    public String pringPanel() {
+        return "panel";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -71,18 +79,29 @@ public class MainController {
         return "login";
     }
 
+    @Transactional
     @RequestMapping(value = "/filter/{input}", method = RequestMethod.GET)
     public String printFilterPage(@PathVariable String input, ModelMap modelMap) {
 
-        ArrayList<Lot> lotlist = new ArrayList<>();
+        List<Lot> lotlist; //TODO rewrite to sql q., change to int (size)
 
-        for (Lot h : lotService.getAll()) {
-            if (h.getLotName().startsWith(input)) {
-                lotlist.add(h);
+        if (isSubCategory(input)) {
+            lotlist = subCategoryService.getOneByName(input).getLots();//TODO rewrite to .getLost().size()
+        }
+        else {
+            lotlist = new ArrayList<>();
+            for (Lot h : lotService.getAll()) { //TODO rewrite to sql q.
+                if (h.getLotName().startsWith(input)) {
+                    lotlist.add(h);
+                }
             }
         }
 
         int size = lotlist.size()%10 == 0 ? lotlist.size()/10 : (lotlist.size()/10) + 1;
+
+        if (size <= 0) {
+            modelMap.addAttribute("noData", "No Data Founded");
+        }
 
         modelMap.addAttribute("size", size);
 
@@ -90,11 +109,11 @@ public class MainController {
     }
 
     @RequestMapping(value = "/lot/{lotid}", method = RequestMethod.GET)
-    public String findLot(@PathVariable String lotid) {
+    public String findLot(@PathVariable String lotid, ModelMap modelMap) {
 
         Lot lot = lotService.getOne(Long.valueOf(lotid));
-
-        //here put lot to view
+        lot.incrementViewCounter(); //TODO write val/ to db after method
+        modelMap.addAttribute("lot", lot);
 
         return "lotdetails";
     }
@@ -115,5 +134,15 @@ public class MainController {
             result += Integer.toString((aB & 0xff) + 0x100, 16).substring(1);
         }
         return result;
+    }
+
+    private boolean isSubCategory(String key) {
+
+        for (SubCategory subCategory : subCategoryService.getAll()) {
+            if (subCategory.getName().equals(key)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

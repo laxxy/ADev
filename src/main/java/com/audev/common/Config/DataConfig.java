@@ -9,6 +9,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
 import javax.persistence.EntityManagerFactory;
@@ -19,6 +20,7 @@ import java.util.Properties;
  * Created by cosxt on 29.11.2015.
  */
 @Configuration
+@EnableTransactionManagement
 @ComponentScan("com.audev.common")
 @EnableJpaRepositories("com.audev.common.Repository")
 public class DataConfig {

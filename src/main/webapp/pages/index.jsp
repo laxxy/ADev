@@ -17,7 +17,7 @@
 	<link href="<c:url value="/assets/core/css/responsive.css"/>" rel="stylesheet">
 </head><!--/head-->
 
-<body onload="getCategory()">
+<body>
 	<header id="header"><!--header-->
 		<div class="header_top"><!--header_top-->
 			<div class="container">
@@ -86,8 +86,18 @@
 							</button>
 						</div>
 						<div class="mainmenu pull-left">
-							<ul class="nav navbar-nav collapse navbar-collapse" id="category">
-
+							<ul class="nav navbar-nav collapse navbar-collapse">
+								<c:forEach items="${category}" var="cat">
+									<li class="dropdown">
+										<a href="">${cat.name}
+											<i class="fa fa-angle-down"></i></a>
+										<ul role="menu" class="sub-menu">
+										<c:forEach items="${cat.subCategories}" var="subCat">
+											<li><a href="/filter/${subCat.name}">${subCat.name}</a></li>
+										</c:forEach>
+										</ul>
+									</li>
+								</c:forEach>
 							</ul>
 						</div>
 					</div>
@@ -575,5 +585,6 @@
 	<script src="<c:url value="/assets/core/js/jquery.prettyPhoto.js"/>"></script>
 	<script src="<c:url value="/assets/core/js/main.js"/>"></script>
 	<script src="<c:url value="/assets/core/js/ajax.js"/>"></script>
+	<script src="<c:url value="/assets/core/js/ajax.req.js"/>"></script>
 </body>
 </html>

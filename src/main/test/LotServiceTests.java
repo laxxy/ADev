@@ -8,6 +8,7 @@ import com.audev.common.Service.LotService;
 import com.audev.common.Service.SubCategoryService;
 import com.audev.common.Service.UserService;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,12 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by cosxt on 01.12.2015.
@@ -41,19 +45,19 @@ public class LotServiceTests {
 
     }
 
-    @Test
+    /*@Test
     public void tetstcc() {
 
-        /*
+
         //add data for test
-        for (int i = 0; i < 4; i++) {
+        /*for (int i = 0; i < 4; i++) {
             Category category = new Category();
             category.setName("Test: " + i);
             SubCategory subCategory;
             for (int j = 0; j < 10; j++) {
                 subCategory = new SubCategory(category);
 
-                subCategory.setName("inner test" + i);
+                subCategory.setName("innertest" + Math.random());
 
                 category.getSubCategories().add(subCategory);
 
@@ -61,11 +65,33 @@ public class LotServiceTests {
 
                 subCategoryService.saveOne(subCategory);
             }
-        }*/
+        }
+        //add lots for test
 
-        for (SubCategory subCategory : categoryService.getAll().get(0).getSubCategories()){
-            System.out.println(subCategory.getName());
+        SubCategory subCategory = subCategoryService.getAll().get(0);
+        List<Lot> list = new ArrayList<>();
+
+        for (int i = 0; i < 10; i++) {
+            Lot lot = new Lot(subCategoryService.getOne(1));
+            lot.setLotName("Name" + i);
+            lot.setBidCurrent(10);
+            list.add(lot);
+            lotService.addOne(lot);
         }
 
-    }
+        subCategory.setLots(list);
+        subCategoryService.saveOne(subCategory);
+
+        /*for (SubCategory subCategory : categoryService.getAll().get(0).getSubCategories()){
+            System.out.println(subCategory.getName());
+        }
+    }*/
+
+    /*@Test
+    @Transactional
+    public void testcc1() {
+
+       List<Lot> lots =  subCategoryService.getOneByName("innertest0.9078622510853308").getLots();
+        lots.forEach(lot -> System.out.println(lot.getLotName()));
+    }*/
 }

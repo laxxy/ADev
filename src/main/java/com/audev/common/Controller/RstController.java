@@ -1,8 +1,6 @@
 package com.audev.common.Controller;
 
-import com.audev.common.Entity.Category;
 import com.audev.common.Entity.Lot;
-import com.audev.common.Entity.SubCategory;
 import com.audev.common.Model.SearchAjaxResponseBody;
 import com.audev.common.Model.SearchCriteria;
 import com.audev.common.Service.CategoryService;
@@ -30,7 +28,7 @@ public class RstController {
     @Autowired
     private CategoryService categoryService;
 
-    //@JsonView(com.audev.common.Views.JsonView.Public.class)
+    @JsonView(SearchCriteria.ViewSearch.class)
     @RequestMapping(value = "/search")
     public SearchAjaxResponseBody getSearchResult(@RequestBody SearchCriteria searchCriteria) {
 
@@ -52,21 +50,14 @@ public class RstController {
         }
     }
 
-    @RequestMapping(value = "/filter/{input}")
     @JsonView(Lot.Public.class)
+    @RequestMapping(value = "/filter/{input}")
     public List<Lot> getFilterData(@PathVariable String input, @RequestBody String num) {
 
-        List<Lot> list = new ArrayList<Lot>();
+        List<Lot> list = new ArrayList<>();
 
             list.add(lotService.getOne(1));
-            list.add(lotService.getOne(2));
 
         return list;
-    }
-
-    @RequestMapping(value = "/category")
-    @JsonView(Category.CatViewWithSubCategories.class)
-    public List<Category> getCategory() {
-        return categoryService.getAll();
     }
 }

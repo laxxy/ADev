@@ -40,6 +40,8 @@ public class Lot {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sub_id", nullable = false)
     private SubCategory subCategory;
+    @Column(name = "view_counter")
+    private int viewCounter;
     private transient Set<Delivery> bidDelivery;
     private transient Set<Pay> bidPay;
     private transient Map<User, Double> bidAll;
@@ -153,10 +155,11 @@ public class Lot {
         this.subCategory = subCategory;
     }
 
-    /*@Override
-    public String toString() {
-        return "Lot[name:" + lotName + ", info:" + lotInfo + ", dastart:" + dateOfStart +
-                ", daend:" + dateOfEnd + ", bidinit:" + bidInitial + ", bidcurrent:" +
-                bidCurrent + ", bidbuynow" + bidBuyNow + "]";
-    }*/
+    public int getViewCounter() {
+        return viewCounter;
+    }
+
+    public void incrementViewCounter() {
+        this.viewCounter++;
+    }
 }
