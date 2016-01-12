@@ -7,6 +7,8 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by cosxt on 28.11.2015.
@@ -18,6 +20,7 @@ public class User {
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
+    @Column(name = "user_id")
     private long id;
     @Column(name = "login")
     private String login;
@@ -34,11 +37,14 @@ public class User {
     private String email;
     @Column(name = "telephone")
     private String telephone;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "User")
+    private List<Lot> lots;
     //history
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
     public User() {
+        lots = new ArrayList<>();
     }
 
     public long getId() {
@@ -99,5 +105,13 @@ public class User {
 
     public void setUserRole(UserRole userRole) {
         this.userRole = userRole;
+    }
+
+    public List<Lot> getLots() {
+        return lots;
+    }
+
+    public void setLots(List<Lot> lots) {
+        this.lots = lots;
     }
 }

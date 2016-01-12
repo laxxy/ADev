@@ -21,7 +21,7 @@ public class Lot {
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name= "increment", strategy= "increment")
-    @Column(name = "id")
+    @Column(name = "lot_id")
     private long id;
     @Column(name = "lot_name")
     private String lotName;
@@ -42,6 +42,12 @@ public class Lot {
     private SubCategory subCategory;
     @Column(name = "view_counter")
     private int viewCounter;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "Lot")
+    private List<Chat> chats;
+
     private transient Set<Delivery> bidDelivery;
     private transient Set<Pay> bidPay;
     private transient Map<User, Double> bidAll;
@@ -161,5 +167,21 @@ public class Lot {
 
     public void incrementViewCounter() {
         this.viewCounter++;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Chat> getChats() {
+        return chats;
+    }
+
+    public void setChats(List<Chat> chats) {
+        this.chats = chats;
     }
 }
