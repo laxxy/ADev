@@ -7,5 +7,5 @@ import com.audev.common.Entity.Message;
  */
 public interface MessageService {
     public void getAll();
-    public void saeOne(Message message);
+    public void saveOne(Message message);
 }

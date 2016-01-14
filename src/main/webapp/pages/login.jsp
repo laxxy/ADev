@@ -167,6 +167,9 @@
 							<form:input path="email" placeholder="Email Address" cssClass="form-control"/>
 							<form:errors path="email" cssClass="alert-danger" />
 
+							<form:input path="login" placeholder="Name" cssClass="form-control"/>
+							<form:errors path="login" cssClass="alert-danger" />
+
 							<form:password path="password" placeholder="Password" cssClass="form-control"/>
 							<form:errors path="password" cssClass="alert-danger" />
 

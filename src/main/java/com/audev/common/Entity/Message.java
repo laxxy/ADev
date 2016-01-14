@@ -18,17 +18,19 @@ public class Message {
     private long id;
     @Column(name = "message")
     private String message;
-    @Column(name = "date")
+    @Temporal(TemporalType.DATE)
+    @Column(name = "date", nullable = false, length = 10)
     private Date date;
     @Column(name = "is_readed")
     private boolean isReaded;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "chat_id")
+    @JoinColumn(name = "chat_id", nullable = true)
     private Chat chat;
-    @OneToOne
-    private User author;
+    @Column(name = "autor_name")
+    private String authorName;
 
     public Message() {
+        date = new Date();
     }
 
     public long getId() {
@@ -59,12 +61,12 @@ public class Message {
         this.isReaded = isReaded;
     }
 
-    public User getAuthor() {
-        return author;
+    public String getAuthor() {
+        return authorName;
     }
 
-    public void setAuthor(User author) {
-        this.author = author;
+    public void setAuthor(String authorName) {
+        this.authorName = authorName;
     }
 
     public Chat getChat() {

@@ -36,4 +36,9 @@ public class LotServiceImpl implements LotService {
     public void addOne(Lot lot) {
         lotRepository.save(lot);
     }
+
+    @Override
+    public Lot getOneByName(String name) {
+        return lotRepository.findBylotName(name);
+    }
 }

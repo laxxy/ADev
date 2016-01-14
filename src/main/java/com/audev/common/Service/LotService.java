@@ -9,6 +9,7 @@ import java.util.List;
  */
 public interface LotService {
     public Lot getOne(long id);
+    public Lot getOneByName(String name);
     public List<Lot> getAll();
     public void deleteOne(long id);
     public void updateOne(long id);

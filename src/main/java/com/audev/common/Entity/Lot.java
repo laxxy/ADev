@@ -13,7 +13,7 @@ import javax.persistence.*;
  * Created by cosxt on 28.11.2015.
  */
 @Entity
-@Table(name = "Lot")
+@Table(name = "lot")
 public class Lot {
 
     public interface Public{}
@@ -23,13 +23,15 @@ public class Lot {
     @GenericGenerator(name= "increment", strategy= "increment")
     @Column(name = "lot_id")
     private long id;
-    @Column(name = "lot_name")
+    @Column(name = "name")
     private String lotName;
     @Column(name = "lot_info")
     private String lotInfo;
-    @Column(name = "date_of_start")
-    private Date dateOfStart;
-    @Column(name = "date_of_end")
+    @Temporal(TemporalType.DATE)
+    @Column(name = "start_date", nullable = false, length = 10)
+    private Date dateOfStart = new Date(); //TODO Delete after test
+    @Temporal(TemporalType.DATE)
+    @Column(name = "end_date", nullable = true, length = 10)
     private Date dateOfEnd;
     //@Column(name = "bid_initial")
     //private double bidInitial;
@@ -43,9 +45,9 @@ public class Lot {
     @Column(name = "view_counter")
     private int viewCounter;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = true) //TODO change to false after User session attr.
     private User user;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "Lot")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "lot")
     private List<Chat> chats;
 
     private transient Set<Delivery> bidDelivery;

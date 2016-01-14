@@ -20,15 +20,17 @@ public class Chat {
     @Column(name = "chat_id")
     private long id;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "lot_id", nullable = false)
+    @JoinColumn(name = "lot_id", nullable = true)
     private Lot lot;
-
+    @Temporal(TemporalType.DATE)
+    @Column(name = "start_date", nullable = false, length = 10)
     private Date startDate;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "chat")
-    List<Message> messages;
+    private List<Message> messages;
 
     public Chat(){
         messages = new ArrayList<>();
+        startDate = new Date();
     }
 
     public Date getStartDate() {
@@ -53,5 +55,9 @@ public class Chat {
 
     public void setLot(Lot lot) {
         this.lot = lot;
+    }
+
+    public long getId() {
+        return id;
     }
 }

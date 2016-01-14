@@ -14,7 +14,7 @@ import java.util.List;
  * Created by cosxt on 28.11.2015.
  */
 @Entity
-@Table(name = "User")
+@Table(name = "user")
 public class User {
 
     @Id
@@ -25,7 +25,7 @@ public class User {
     @Column(name = "login")
     private String login;
     @Column(name = "password")
-    @Size(min = 6, max = 20, message = "Sorry, password must have at least 6 dig.")
+    @Size(min = 6, max = 255, message = "Sorry, password must have at least 6 dig.")
     private String password;
     @Column(name = "first_name")
     private String firstName;
@@ -37,7 +37,7 @@ public class User {
     private String email;
     @Column(name = "telephone")
     private String telephone;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "User")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private List<Lot> lots;
     //history
     @Enumerated(EnumType.STRING)

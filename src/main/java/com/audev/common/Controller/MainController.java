@@ -1,6 +1,5 @@
 package com.audev.common.Controller;
 
-import com.audev.common.Entity.Category;
 import com.audev.common.Entity.Enums.UserRole;
 import com.audev.common.Entity.Lot;
 import com.audev.common.Entity.SubCategory;
@@ -10,6 +9,8 @@ import com.audev.common.Service.LotService;
 import com.audev.common.Service.SubCategoryService;
 import com.audev.common.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -21,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -43,6 +43,8 @@ public class MainController {
     @Autowired
     private SubCategoryService subCategoryService;
 
+    //private UserDetails user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
     @RequestMapping(value = "/")
     public String printMain(Model model) {
 
@@ -60,7 +62,13 @@ public class MainController {
     }
 
     @RequestMapping(value = "/panel")
-    public String pringPanel() {
+    public String printPanel(ModelMap modelMap) {
+
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userService.getUserByEmail(userDetails.getUsername());
+
+
+
         return "panel";
     }
 

@@ -22,6 +22,7 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by cosxt on 01.12.2015.
@@ -45,19 +46,19 @@ public class LotServiceTests {
 
     }
 
-    /*@Test
-    public void tetstcc() {
+    @Test
+    public void tetstcc() { //test data
 
 
         //add data for test
-        /*for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++) {
             Category category = new Category();
             category.setName("Test: " + i);
             SubCategory subCategory;
             for (int j = 0; j < 10; j++) {
                 subCategory = new SubCategory(category);
 
-                subCategory.setName("innertest" + Math.random());
+                subCategory.setName("innertest" + new Random().nextInt(10000));
 
                 category.getSubCategories().add(subCategory);
 
@@ -84,14 +85,14 @@ public class LotServiceTests {
 
         /*for (SubCategory subCategory : categoryService.getAll().get(0).getSubCategories()){
             System.out.println(subCategory.getName());
-        }
-    }*/
+        }*/
+    }
 
     /*@Test
     @Transactional
     public void testcc1() {
 
-       List<Lot> lots =  subCategoryService.getOneByName("innertest0.9078622510853308").getLots();
+       List<Lot> lots =  subCategoryService.getOneByName("innertest784").getLots();
         lots.forEach(lot -> System.out.println(lot.getLotName()));
     }*/
 }
