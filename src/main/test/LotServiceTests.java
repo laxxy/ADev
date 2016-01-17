@@ -46,12 +46,13 @@ public class LotServiceTests {
 
     }
 
+
     @Test
     public void tetstcc() { //test data
 
 
         //add data for test
-        for (int i = 0; i < 4; i++) {
+        /*for (int i = 0; i < 4; i++) {
             Category category = new Category();
             category.setName("Test: " + i);
             SubCategory subCategory;
@@ -68,13 +69,13 @@ public class LotServiceTests {
             }
         }
         //add lots for test
-
+        */
         SubCategory subCategory = subCategoryService.getAll().get(0);
         List<Lot> list = new ArrayList<>();
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 5; i++) {
             Lot lot = new Lot(subCategoryService.getOne(1));
-            lot.setLotName("Name" + i);
+            lot.setLotName("Name" + new Random().nextInt(500));
             lot.setBidCurrent(10);
             list.add(lot);
             lotService.addOne(lot);

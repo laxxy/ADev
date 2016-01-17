@@ -5,7 +5,9 @@ import com.audev.common.Model.SearchAjaxResponseBody;
 import com.audev.common.Model.SearchCriteria;
 import com.audev.common.Service.CategoryService;
 import com.audev.common.Service.LotService;
+import com.audev.common.Service.SubCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +29,9 @@ public class RstController {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private SubCategoryService subCategoryService;
 
     @JsonView(SearchCriteria.ViewSearch.class)
     @RequestMapping(value = "/search")
@@ -51,13 +56,30 @@ public class RstController {
     }
 
     @JsonView(Lot.Public.class)
+    @Transactional
     @RequestMapping(value = "/filter/{input}")
     public List<Lot> getFilterData(@PathVariable String input, @RequestBody String num) {
 
-        List<Lot> list = new ArrayList<>();
+        ArrayList<Lot> result = new ArrayList<>();
 
-            list.add(lotService.getOne(1));
-
-        return list;
+        if (subCategoryService.getOneByName(input) != null) {
+            List<Lot> lots = subCategoryService.getOneByName(input).getLots();
+            int start = Integer.valueOf(num.replaceAll("[a-zA-Z ={}:\"]+", ""))*10;
+            int end = start > lots.size() ? lots.size() : start;
+            for (int i = start -10; i < end; i++) {
+                result.add(lots.get(i));
+            }
+            return result;
+        }
+        else {
+            List<Lot> lots = lotService.getAll();
+            int start = Integer.valueOf(num.replaceAll("[a-zA-Z ={}:\"]+", ""))*10;
+            int end = start > lots.size() ? lots.size() : start;
+            for (int i = start -10; i < end; i++) {
+                if (lots.get(i).getLotName().equalsIgnoreCase(input) || lots.get(i).getLotName().startsWith(input))
+                    result.add(lots.get(i));
+            }
+            return result;
+        }
     }
 }

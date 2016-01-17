@@ -1,5 +1,6 @@
 package com.audev.common.Controller;
 
+import com.audev.common.Entity.Chat;
 import com.audev.common.Entity.Enums.UserRole;
 import com.audev.common.Entity.Lot;
 import com.audev.common.Entity.SubCategory;
@@ -9,6 +10,7 @@ import com.audev.common.Service.LotService;
 import com.audev.common.Service.SubCategoryService;
 import com.audev.common.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -43,8 +45,6 @@ public class MainController {
     @Autowired
     private SubCategoryService subCategoryService;
 
-    //private UserDetails user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
     @RequestMapping(value = "/")
     public String printMain(Model model) {
 
@@ -64,12 +64,25 @@ public class MainController {
     @RequestMapping(value = "/panel")
     public String printPanel(ModelMap modelMap) {
 
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        //get user
+        UserDetails userDetails = null;
+
+        if (!SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
+            userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        }
+        else return "panel";
+
         User user = userService.getUserByEmail(userDetails.getUsername());
-
-
+        List<Lot> lots = user.getLots();
+        modelMap.addAttribute("lots", lots);
 
         return "panel";
+    }
+
+    @RequestMapping(value = "/panel/chat")
+    public String printPanelChat() {
+
+        return "chat";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)

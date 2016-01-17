@@ -10,6 +10,7 @@ import java.util.List;
 public interface SubCategoryService {
     SubCategory getOne(long id);
     SubCategory getOneByName(String name);
+    SubCategory getOnyById(long id);
     void saveOne(SubCategory subCategory);
     List<SubCategory> getAll();
 

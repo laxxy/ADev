@@ -1,4 +1,7 @@
 import com.audev.common.Config.DataConfig;
+import com.audev.common.Entity.Chat;
+import com.audev.common.Entity.Lot;
+import com.audev.common.Entity.Message;
 import com.audev.common.Entity.User;
 import com.audev.common.Service.ChatService;
 import com.audev.common.Service.LotService;
@@ -32,8 +35,30 @@ public class ChatTest {
     private LotService lotService;
 
     @Test
-    public void test() {
-        User user = userService.getUserByEmail("asd@asd.com");
-        System.out.println(lotService.getOneByName("Name0").getLotName());
+    public void testIn() {
+        User user = userService.getUserByEmail("cosxtgx@gmail.com");
+        Lot lot = lotService.getOneByName("Name1");
+        user.getLots().add(lot);
+        lot.setUser(user);
+        lotService.addOne(lot);
+        userService.addUser(user);
+
+        Chat chat = new Chat();
+
+        Message message = new Message();
+        message.setMessage("Asd for Test");
+        message.setIsReaded(false);
+        lot.getChats().add(chat);
+        chat.getMessages().add(message);
+        chat.setLot(lot);
+        message.setChat(chat);
+        message.setAuthor(user.getLogin());
+        lotService.addOne(lot);
+        chatService.saveOne(chat);
+        messageService.saveOne(message);
+
+        //get
+
     }
+
  }

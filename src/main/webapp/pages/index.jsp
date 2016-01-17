@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,7 +67,12 @@
 								<li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
 								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
 								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-								<li><a href="/login"><i class="fa fa-lock"></i> Login</a></li>
+								<sec:authorize access="!isAuthenticated()">
+									<li><a href="/login"><i class="fa fa-lock"></i> Login</a></li>
+								</sec:authorize>
+								<sec:authorize access="isAuthenticated()">
+									<li><a href="/logout"><i class="fa fa-lock"></i> Logout</a></li>
+								</sec:authorize>
 							</ul>
 						</div>
 					</div>
