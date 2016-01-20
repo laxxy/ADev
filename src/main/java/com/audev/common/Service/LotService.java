@@ -14,4 +14,5 @@ public interface LotService {
     public void deleteOne(long id);
     public void updateOne(long id);
     public void addOne(Lot lot);
+    public List<Lot> getBySearch(String s);
 }

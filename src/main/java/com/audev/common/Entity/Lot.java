@@ -33,12 +33,8 @@ public class Lot {
     @Temporal(TemporalType.DATE)
     @Column(name = "end_date", nullable = true, length = 10)
     private Date dateOfEnd;
-    //@Column(name = "bid_initial")
-    //private double bidInitial;
     @Column(name = "bid_current")
     private double bidCurrent;
-    //@Column(name = "bid_buy_now")
-    //private double bidBuyNow;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sub_id", nullable = false)
     private SubCategory subCategory;
@@ -64,6 +60,7 @@ public class Lot {
         this.subCategory = subCategory;
     }
 
+    @JsonView(Public.class)
     public long getId() {
         return id;
     }
@@ -95,7 +92,6 @@ public class Lot {
         this.dateOfStart = dateOfStart;
     }
 
-    @JsonView(Public.class)
     public Date getDateOfEnd() {
         return dateOfEnd;
     }
@@ -103,15 +99,6 @@ public class Lot {
     public void setDateOfEnd(Date dateOfEnd) {
         this.dateOfEnd = dateOfEnd;
     }
-
-    /*@JsonView(Public.class)
-    public double getBidInitial() {
-        return bidInitial;
-    }*/
-
-    /*public void setBidInitial(double bidInitial) {
-        this.bidInitial = bidInitial;
-    }*/
 
     @JsonView(Public.class)
     public double getBidCurrent() {
@@ -121,15 +108,6 @@ public class Lot {
     public void setBidCurrent(double bidCurrent) {
         this.bidCurrent = bidCurrent;
     }
-
-    /*@JsonView(Public.class)
-    public double getBidBuyNow() {
-        return bidBuyNow;
-    }*/
-
-    /*public void setBidBuyNow(double bidBuyNow) {
-        this.bidBuyNow = bidBuyNow;
-    }*/
 
     public Set<Delivery> getBidDelivery() {
         return bidDelivery;

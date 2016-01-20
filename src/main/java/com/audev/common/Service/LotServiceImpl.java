@@ -30,11 +30,14 @@ public class LotServiceImpl implements LotService {
     }
 
     public void updateOne(long id) {
-
     }
 
     public void addOne(Lot lot) {
         lotRepository.save(lot);
+    }
+
+    public List<Lot> getBySearch(String s) {
+        return lotRepository.findBySearchString(s);
     }
 
     @Override

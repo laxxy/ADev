@@ -1,109 +1,274 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lot info</title>
-  <link href="<c:url value="/assets/main/style.css"/>" rel="stylesheet">
-  <link href="<c:url value="/assets/main/css/lot-info.css"/>" rel="stylesheet">
-  <link href="<c:url value="/assets/main/css/bootstrap.min.css"/>" rel="stylesheet">
-  <script src="<c:url value="/assets/core/js/ajax.js"/>"></script>
-
-</head>
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Home | J-PLATFORM</title>
+  <link href="<c:url value="/assets/core/css/bootstrap.min.css"/>" rel="stylesheet">
+  <link href="<c:url value="/assets/core/css/font-awesome.min.css"/>" rel="stylesheet">
+  <link href="<c:url value="/assets/core/css/prettyPhoto.css"/>" rel="stylesheet">
+  <link href="<c:url value="/assets/core/css/price-range.css"/>" rel="stylesheet">
+  <link href="<c:url value="/assets/core/css/animate.css"/>" rel="stylesheet">
+  <link href="<c:url value="/assets/core/css/main.css"/>" rel="stylesheet">
+  <link href="<c:url value="/assets/core/css/responsive.css"/>" rel="stylesheet">
+</head><!--/head-->
 <body>
-<div class="container-fluid">
-  <div class="content-wrapper">
-    <div class="item-container">
-      <div class="container">
-        <div class="col-md-12">
-          <div class="product col-md-3 service-image-left">
+<tiles:insertDefinition name="header"/>
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="left-sidebar">
 
-            <!--<center>
-              <img id="item-display" src="http://www.corsair.com/Media/catalog/product/g/s/gs600_psu_sideview_blue_2.png" alt=""></img>
-            </center>-->
-          </div>
-
-          <div class="container service1-items col-sm-2 col-md-2 pull-left">
-              <a id="item-1" class="service1-item">
-                <img src="http://www.corsair.com/Media/catalog/product/g/s/gs600_psu_sideview_blue_2.png" alt=""/>
-              </a>
-              <a id="item-2" class="service1-item">
-                <img src="http://www.corsair.com/Media/catalog/product/g/s/gs600_psu_sideview_blue_2.png" alt=""/>
-              </a>
-              <a id="item-3" class="service1-item">
-                <img src="http://www.corsair.com/Media/catalog/product/g/s/gs600_psu_sideview_blue_2.png" alt=""/>
-              </a>
-          </div>
-        </div>
-
-        <div class="col-md-7">
-          <div class="product-title">Corsair GS600 600 Watt PSU</div>
-          <div class="product-desc">The Corsair Gaming Series GS600 is the ideal price/performance choice for mid-spec gaming PC</div>
-          <div class="product-rating"><i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star-o"></i> </div>
-          <hr>
-          <div class="product-price">$ 1234.00</div>
-          <div class="product-stock">In Stock</div>
-          <hr>
-          <div class="btn-group cart">
-            <button type="button" class="btn btn-success">
-              Add to cart
-            </button>
-          </div>
-          <div class="btn-group wishlist">
-            <button type="button" class="btn btn-danger">
-              Add to wishlist
-            </button>
-          </div>
         </div>
       </div>
-    </div>
-    <div class="container-fluid">
-      <div class="col-md-12 product-info">
-        <ul id="myTab" class="nav nav-tabs nav_tabs">
 
-          <li class="active"><a href="#service-one" data-toggle="tab">DESCRIPTION</a></li>
-          <li><a href="#service-two" data-toggle="tab">PRODUCT INFO</a></li>
-          <li><a href="#service-three" data-toggle="tab">REVIEWS</a></li>
+      <div class="col-sm-9 padding-right">
+        <div class="product-details"><!--product-details-->
+          <div class="col-sm-5">
+            <div class="view-product">
+              <img src="images/product-details/1.jpg" alt="" />
+              <h3>ZOOM</h3>
+            </div>
+            <div id="similar-product" class="carousel slide" data-ride="carousel">
 
-        </ul>
-        <div id="myTabContent" class="tab-content">
-          <div class="tab-pane fade in active" id="service-one">
+              <!-- Wrapper for slides -->
+              <div class="carousel-inner">
+                <div class="item active">
+                  <a href=""><img src="images/product-details/similar1.jpg" alt=""></a>
+                  <a href=""><img src="images/product-details/similar2.jpg" alt=""></a>
+                  <a href=""><img src="images/product-details/similar3.jpg" alt=""></a>
+                </div>
+                <div class="item">
+                  <a href=""><img src="images/product-details/similar1.jpg" alt=""></a>
+                  <a href=""><img src="images/product-details/similar2.jpg" alt=""></a>
+                  <a href=""><img src="images/product-details/similar3.jpg" alt=""></a>
+                </div>
+                <div class="item">
+                  <a href=""><img src="images/product-details/similar1.jpg" alt=""></a>
+                  <a href=""><img src="images/product-details/similar2.jpg" alt=""></a>
+                  <a href=""><img src="images/product-details/similar3.jpg" alt=""></a>
+                </div>
 
-            <section class="container product-info">
-              The Corsair Gaming Series GS600 power supply is the ideal price-performance solution for building or upgrading a Gaming PC. A single +12V rail provides up to 48A of reliable, continuous power for multi-core gaming PCs with multiple graphics cards. The ultra-quiet, dual ball-bearing fan automatically adjusts its speed according to temperature, so it will never intrude on your music and games. Blue LEDs bathe the transparent fan blades in a cool glow. Not feeling blue? You can turn off the lighting with the press of a button.
+              </div>
 
-              <h3>Corsair Gaming Series GS600 Features:</h3>
-              <li>It supports the latest ATX12V v2.3 standard and is backward compatible with ATX12V 2.2 and ATX12V 2.01 systems</li>
-              <li>An ultra-quiet 140mm double ball-bearing fan delivers great airflow at an very low noise level by varying fan speed in response to temperature</li>
-              <li>80Plus certified to deliver 80% efficiency or higher at normal load conditions (20% to 100% load)</li>
-              <li>0.99 Active Power Factor Correction provides clean and reliable power</li>
-              <li>Universal AC input from 90~264V — no more hassle of flipping that tiny red switch to select the voltage input!</li>
-              <li>Extra long fully-sleeved cables support full tower chassis</li>
-              <li>A three year warranty and lifetime access to Corsair’s legendary technical support and customer service</li>
-              <li>Over Current/Voltage/Power Protection, Under Voltage Protection and Short Circuit Protection provide complete component safety</li>
-              <li>Dimensions: 150mm(W) x 86mm(H) x 160mm(L)</li>
-              <li>MTBF: 100,000 hours</li>
-              <li>Safety Approvals: UL, CUL, CE, CB, FCC Class B, TÜV, CCC, C-tick</li>
-            </section>
+              <!-- Controls -->
+              <a class="left item-control" href="#similar-product" data-slide="prev">
+                <i class="fa fa-angle-left"></i>
+              </a>
+              <a class="right item-control" href="#similar-product" data-slide="next">
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </div>
 
           </div>
-          <div class="tab-pane fade" id="service-two">
+          <div class="col-sm-7">
+            <div class="product-information"><!--/product-information-->
+              <img src="images/product-details/new.jpg" class="newarrival" alt="" />
+              <h2>Anne Klein Sleeveless Colorblock Scuba</h2>
+              <p>Web ID: 1089772</p>
+              <img src="images/product-details/rating.png" alt="" />
+								<span>
+									<span>US ${lot.bidCurrent}</span>
+								</span>
+              <p><b>Availability:</b> In Stock</p>
+              <p><b>Condition:</b> New</p>
+            </div><!--/product-information-->
+          </div>
+        </div><!--/product-details-->
 
-            <section class="container">
+        <div class="category-tab shop-details-tab"><!--category-tab-->
+          <div class="col-sm-12">
+            <ul class="nav nav-tabs">
+              <li><a href="#details" data-toggle="tab">Details</a></li>
+              <li><a href="#companyprofile" data-toggle="tab">Company Profile</a></li>
+              <li><a href="#tag" data-toggle="tab">Tag</a></li>
+              <li class="active"><a href="/send" data-toggle="tab">Write to Author</a></li>
+            </ul>
+          </div>
+          <div class="tab-content">
+            <div class="tab-pane fade" id="details" >
+              <div class="col-sm-3">
+                <div class="product-image-wrapper">
+                  <div class="single-products">
+                    <div class="productinfo text-center">
+                      <img src="images/home/gallery1.jpg" alt="" />
+                      <h2>$56</h2>
+                      <p>Easy Polo Black Edition</p>
+                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="product-image-wrapper">
+                  <div class="single-products">
+                    <div class="productinfo text-center">
+                      <img src="images/home/gallery2.jpg" alt="" />
+                      <h2>$56</h2>
+                      <p>Easy Polo Black Edition</p>
+                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="product-image-wrapper">
+                  <div class="single-products">
+                    <div class="productinfo text-center">
+                      <img src="images/home/gallery3.jpg" alt="" />
+                      <h2>$56</h2>
+                      <p>Easy Polo Black Edition</p>
+                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="product-image-wrapper">
+                  <div class="single-products">
+                    <div class="productinfo text-center">
+                      <img src="images/home/gallery4.jpg" alt="" />
+                      <h2>$56</h2>
+                      <p>Easy Polo Black Edition</p>
+                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-            </section>
+            <div class="tab-pane fade" id="companyprofile" >
+              <div class="col-sm-3">
+                <div class="product-image-wrapper">
+                  <div class="single-products">
+                    <div class="productinfo text-center">
+                      <img src="images/home/gallery1.jpg" alt="" />
+                      <h2>$56</h2>
+                      <p>Easy Polo Black Edition</p>
+                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="product-image-wrapper">
+                  <div class="single-products">
+                    <div class="productinfo text-center">
+                      <img src="images/home/gallery3.jpg" alt="" />
+                      <h2>$56</h2>
+                      <p>Easy Polo Black Edition</p>
+                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="product-image-wrapper">
+                  <div class="single-products">
+                    <div class="productinfo text-center">
+                      <img src="images/home/gallery2.jpg" alt="" />
+                      <h2>$56</h2>
+                      <p>Easy Polo Black Edition</p>
+                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="product-image-wrapper">
+                  <div class="single-products">
+                    <div class="productinfo text-center">
+                      <img src="images/home/gallery4.jpg" alt="" />
+                      <h2>$56</h2>
+                      <p>Easy Polo Black Edition</p>
+                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-pane fade" id="tag" >
+              <div class="col-sm-3">
+                <div class="product-image-wrapper">
+                  <div class="single-products">
+                    <div class="productinfo text-center">
+                      <img src="images/home/gallery1.jpg" alt="" />
+                      <h2>$56</h2>
+                      <p>Easy Polo Black Edition</p>
+                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="product-image-wrapper">
+                  <div class="single-products">
+                    <div class="productinfo text-center">
+                      <img src="images/home/gallery2.jpg" alt="" />
+                      <h2>$56</h2>
+                      <p>Easy Polo Black Edition</p>
+                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="product-image-wrapper">
+                  <div class="single-products">
+                    <div class="productinfo text-center">
+                      <img src="images/home/gallery3.jpg" alt="" />
+                      <h2>$56</h2>
+                      <p>Easy Polo Black Edition</p>
+                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="product-image-wrapper">
+                  <div class="single-products">
+                    <div class="productinfo text-center">
+                      <img src="images/home/gallery4.jpg" alt="" />
+                      <h2>$56</h2>
+                      <p>Easy Polo Black Edition</p>
+                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-pane fade active in" id="sendMessage" >
+              <div class="col-sm-12">
+                <p><b>Write to Author</b></p>
+
+                <form action="/submit mess">
+                  <textarea name="" ></textarea>
+                  <b>Rating: </b> <img src="images/product-details/rating.png" alt="" />
+                  <button type="button" class="btn btn-default pull-right">
+                    Submit
+                  </button>
+                </form>
+              </div>
+            </div>
 
           </div>
-          <div class="tab-pane fade" id="service-three">
-
-          </div>
-        </div>
-        <hr>
+        </div><!--/category-tab-->
       </div>
     </div>
   </div>
-</div>
+</section>
+
+<tiles:insertDefinition name="footer"/>
+
 </body>
 </html>

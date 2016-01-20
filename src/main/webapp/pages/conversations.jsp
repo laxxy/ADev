@@ -22,47 +22,8 @@
 <body>
 <tiles:insertDefinition name="header"/>
 <section>
-  <sec:authorize access="isAuthenticated()">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-9 padding-right">
-        <div class="category-tab"><!--panel-tab-->
-          <div class="col-sm-12">
-            <ul class="nav nav-tabs">
-              <li class="active"><a href="#active" data-toggle="tab">Active lots</a></li>
-              <li><a href="#blazers" data-toggle="tab">Past</a></li>
-            </ul>
-          </div>
-          <div class="tab-content">
-            <div class="tab-pane fade active in" id="active">
-              <c:forEach items="${lots}" var="lot">
-                <div class="col-sm-3">
-                  <div class="product-image-wrapper">
-                    <div class="single-products">
-                      <div class="productinfo text-center">
-                        <!--<img src="images/home/gallery1.jpg" alt="">-->
-                        <h2>${lot.bidCurrent}</h2>
-                        <p>${lot.lotName}</p>
-                        <a href="/panel/chat" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Income Messages</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </c:forEach>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  </sec:authorize>
-  <sec:authorize access="!isAuthenticated()">
-    <script>
-      window.location = "/login";
-    </script>
-  </sec:authorize>
-</section>
 
+</section>
 <tiles:insertDefinition name="footer"/>
 
 <script src="<c:url value="/assets/core/js/jquery.js"/>"></script>

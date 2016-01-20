@@ -42,12 +42,13 @@ function display(data) {
                 "</a>"+
                 "<div class=media-body>"+
                 "<ul class=sinlge-post-meta>"+
-                "<li><i class='fa fa-user'></i>Janis Gallagher</li>"+
-                "<li><i class='fa fa-clock-o'></i> 1:33 pm</li>"+
-                "<li><i class='fa fa-calendar'></i>"+entry.bidCurrent+"</li>"+
+                /*"<li><i class='fa fa-user'></i>" + entry.user.login + "</li>"+*/
+                "<li><i class='fa fa-clock-o'></i>" + entry.dateOfStart + "</li>"+
+                "<li><i class='fa fa-calendar'></i>" + entry.bidCurrent + "</li>"+
                 "</ul>"+
                 "<p>"+entry.lotName+"<p>"+
-                "<a class='btn btn-primary' href=''><i class='fa fa-reply'></i>More</a>"+
+                "<a class='btn btn-primary' href=/lot/" + entry.id+
+                "><i class='fa fa-reply'></i>More</a>"+
                 "</div>"+
                 "</li>";
     });

@@ -3,6 +3,7 @@ import com.audev.common.Entity.Category;
 import com.audev.common.Entity.Lot;
 import com.audev.common.Entity.SubCategory;
 import com.audev.common.Entity.User;
+import com.audev.common.Model.SearchCriteria;
 import com.audev.common.Service.CategoryService;
 import com.audev.common.Service.LotService;
 import com.audev.common.Service.SubCategoryService;
@@ -69,7 +70,7 @@ public class LotServiceTests {
             }
         }
         //add lots for test
-        */
+
         SubCategory subCategory = subCategoryService.getAll().get(0);
         List<Lot> list = new ArrayList<>();
 
@@ -84,16 +85,13 @@ public class LotServiceTests {
         subCategory.setLots(list);
         subCategoryService.saveOne(subCategory);
 
-        /*for (SubCategory subCategory : categoryService.getAll().get(0).getSubCategories()){
+        for (SubCategory subCategory : categoryService.getAll().get(0).getSubCategories()){
             System.out.println(subCategory.getName());
         }*/
     }
 
-    /*@Test
+    @Test
     @Transactional
     public void testcc1() {
-
-       List<Lot> lots =  subCategoryService.getOneByName("innertest784").getLots();
-        lots.forEach(lot -> System.out.println(lot.getLotName()));
-    }*/
+    }
 }

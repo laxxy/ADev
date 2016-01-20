@@ -5,6 +5,7 @@ import com.audev.common.Entity.Enums.UserRole;
 import com.audev.common.Entity.Lot;
 import com.audev.common.Entity.SubCategory;
 import com.audev.common.Entity.User;
+import com.audev.common.Model.SearchCriteria;
 import com.audev.common.Service.CategoryService;
 import com.audev.common.Service.LotService;
 import com.audev.common.Service.SubCategoryService;
@@ -98,6 +99,12 @@ public class MainController {
         userService.addUser(user);
         modelMap.addAttribute("done", "Registration is done");
         return "login";
+    }
+
+    @RequestMapping(value = "/conversations")
+    public String printConversations(ModelMap modelMap) {
+
+        return "conversations";
     }
 
     @Transactional
