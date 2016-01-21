@@ -1,17 +1,14 @@
 package com.audev.common.Controller;
 
-import com.audev.common.Entity.Chat;
 import com.audev.common.Entity.Enums.UserRole;
 import com.audev.common.Entity.Lot;
-import com.audev.common.Entity.SubCategory;
 import com.audev.common.Entity.User;
-import com.audev.common.Model.SearchCriteria;
 import com.audev.common.Service.CategoryService;
 import com.audev.common.Service.LotService;
 import com.audev.common.Service.SubCategoryService;
 import com.audev.common.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -24,13 +21,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by cosxt on 04.12.2015.
  */
 @Controller
+@Scope("session")
 @RequestMapping(value = "/")
 public class MainController {
 
@@ -65,18 +62,12 @@ public class MainController {
     @RequestMapping(value = "/panel")
     public String printPanel(ModelMap modelMap) {
 
-        //get user
-        UserDetails userDetails = null;
-
-        if (!SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
-            userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (getUserFromSession() == null) {
+            return "panel";
         }
-        else return "panel";
 
-        User user = userService.getUserByEmail(userDetails.getUsername());
-        List<Lot> lots = user.getLots();
+        List<Lot> lots = getUserFromSession().getLots();
         modelMap.addAttribute("lots", lots);
-
         return "panel";
     }
 
@@ -101,28 +92,17 @@ public class MainController {
         return "login";
     }
 
-    @RequestMapping(value = "/conversations")
-    public String printConversations(ModelMap modelMap) {
-
-        return "conversations";
-    }
-
     @Transactional
     @RequestMapping(value = "/filter/{input}", method = RequestMethod.GET)
     public String printFilterPage(@PathVariable String input, ModelMap modelMap) {
 
         List<Lot> lotlist; //TODO rewrite to sql q., change to int (size)
 
-        if (isSubCategory(input)) {
+        if (subCategoryService.getOneByName(input) != null) {
             lotlist = subCategoryService.getOneByName(input).getLots();//TODO rewrite to .getLost().size()
         }
         else {
-            lotlist = new ArrayList<>();
-            for (Lot h : lotService.getAll()) { //TODO rewrite to sql q.
-                if (h.getLotName().startsWith(input)) {
-                    lotlist.add(h);
-                }
-            }
+            lotlist = lotService.getBySearch(input);
         }
 
         int size = lotlist.size()%10 == 0 ? lotlist.size()/10 : (lotlist.size()/10) + 1;
@@ -164,13 +144,12 @@ public class MainController {
         return result;
     }
 
-    private boolean isSubCategory(String key) {
-
-        for (SubCategory subCategory : subCategoryService.getAll()) {
-            if (subCategory.getName().equals(key)) {
-                return true;
-            }
+    private User getUserFromSession() {
+        UserDetails userDetails;
+        if (!SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
+            userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            return userService.getUserByEmail(userDetails.getUsername());
         }
-        return false;
+        else return null;
     }
 }

@@ -28,10 +28,5 @@ public class UserTest {
 
     @Test
     public void test() {
-        SearchCriteria searchCriteria = new SearchCriteria();
-        searchCriteria.setSearchString("Name0");
-        System.out.println(lotService.getBySearch(searchCriteria.getSearchString()));
-        System.out.println(lotService.getBySearch(searchCriteria.getSearchString()).size());
-        //lotService.getBySearch(searchCriteria.getSearchString()).forEach(h -> System.out.println(h.getLotName()));
     }
 }

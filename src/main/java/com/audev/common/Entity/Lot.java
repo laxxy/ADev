@@ -1,7 +1,5 @@
 package com.audev.common.Entity;
 
-import com.audev.common.Entity.Enums.Delivery;
-import com.audev.common.Entity.Enums.Pay;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -29,7 +27,7 @@ public class Lot {
     private String lotInfo;
     @Temporal(TemporalType.DATE)
     @Column(name = "start_date", nullable = false, length = 10)
-    private Date dateOfStart = new Date(); //TODO Delete after test
+    private Date dateOfStart;
     @Temporal(TemporalType.DATE)
     @Column(name = "end_date", nullable = true, length = 10)
     private Date dateOfEnd;
@@ -41,23 +39,17 @@ public class Lot {
     @Column(name = "view_counter")
     private int viewCounter;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id", nullable = true) //TODO change to false after User session attr.
+    @JoinColumn(name = "user_id", nullable = false) //TODO change to false after User session attr.
     private User user;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "lot")
     private List<Chat> chats;
 
-    private transient Set<Delivery> bidDelivery;
-    private transient Set<Pay> bidPay;
-    private transient Map<User, Double> bidAll;
-
-    public Lot() {
-        bidDelivery = new HashSet<Delivery>();
-        bidPay = new HashSet<Pay>();
-        bidAll = new TreeMap<User, Double>();
+    public Lot() {;
     }
 
     public Lot(SubCategory subCategory) {
         this.subCategory = subCategory;
+        dateOfStart = new Date();
     }
 
     @JsonView(Public.class)
@@ -107,30 +99,6 @@ public class Lot {
 
     public void setBidCurrent(double bidCurrent) {
         this.bidCurrent = bidCurrent;
-    }
-
-    public Set<Delivery> getBidDelivery() {
-        return bidDelivery;
-    }
-
-    public void setBidDelivery(Set<Delivery> bidDelivery) {
-        this.bidDelivery = bidDelivery;
-    }
-
-    public Set<Pay> getBidPay() {
-        return bidPay;
-    }
-
-    public void setBidPay(Set<Pay> bidPay) {
-        this.bidPay = bidPay;
-    }
-
-    public Map<User, Double> getBidAll() {
-        return bidAll;
-    }
-
-    public void setBidAll(Map<User, Double> bidAll) {
-        this.bidAll = bidAll;
     }
 
     public SubCategory getSubCategory() {

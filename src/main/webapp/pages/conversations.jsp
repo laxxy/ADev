@@ -21,8 +21,40 @@
 </head><!--/head-->
 <body>
 <tiles:insertDefinition name="header"/>
-<section>
-
+<section id="cart_items">
+    <div class="container">
+        <div class="table-responsive cart_info">
+            <table class="table table-condensed">
+                <thead>
+                <tr class="cart_menu">
+                    <td class="chat">Conversations</td>
+                    <td class="description"></td>
+                    <td class="price">Price</td>
+                    <td class="quantity">Quantity</td>
+                    <td class="total">Total</td>
+                    <td></td>
+                </tr>
+                </thead>
+                ${nodata}
+                <tbody>
+                <c:forEach items="${chats}" var="chat">
+                <tr>
+                    <td class="cart_product">
+                        <a href=""><img src="images/cart/one.png" alt=""></a>
+                    </td>
+                    <td class="cart_description">
+                        <h4><a href="">${chat.lot.user.login}</a></h4>
+                        <p>${chat.lot.lotName}</p>
+                    </td>
+                    <td class="cart_delete">
+                        <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+                    </td>
+                </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </section>
 <tiles:insertDefinition name="footer"/>
 
@@ -32,6 +64,5 @@
 <script src="<c:url value="/assets/core/js/price-range.js"/>"></script>
 <script src="<c:url value="/assets/core/js/jquery.prettyPhoto.js"/>"></script>
 <script src="<c:url value="/assets/core/js/main.js"/>"></script>
-<script src="<c:url value="/assets/core/js/ajax.js"/>"></script>
 </body>
 </html>

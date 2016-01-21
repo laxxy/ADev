@@ -1,6 +1,5 @@
 package com.audev.common.Entity;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;

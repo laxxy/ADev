@@ -71,6 +71,5 @@
 <script src="<c:url value="/assets/core/js/price-range.js"/>"></script>
 <script src="<c:url value="/assets/core/js/jquery.prettyPhoto.js"/>"></script>
 <script src="<c:url value="/assets/core/js/main.js"/>"></script>
-<script src="<c:url value="/assets/core/js/ajax.js"/>"></script>
 </body>
 </html>

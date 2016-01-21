@@ -14,7 +14,7 @@ public interface LotRepository extends JpaRepository<Lot, Long> {
 
     Lot findBylotName(String s);
 
-    @Query("select h from Lot h where lower(h.lotName) like :pattern")
+    @Query("select h from Lot h where lower(h.lotName) like CONCAT(:pattern,'%')")
     List<Lot> findBySearchString(@Param("pattern") String pattern);
 
 }

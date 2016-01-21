@@ -11,7 +11,7 @@
             <ul class="nav nav-pills">
               <li><a href="#"><i class="fa fa-phone"></i> +0 00 00 00 000</a></li>
               <sec:authorize access="isAuthenticated()">
-                <li><a href="#"><i class="fa fa-envelope"></i> Income messages : 0</a></li>
+                <li><a href="/conversations"><i class="fa fa-envelope"></i> Income messages : 0</a></li>
               </sec:authorize>
             </ul>
           </div>

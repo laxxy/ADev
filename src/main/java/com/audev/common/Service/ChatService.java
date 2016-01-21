@@ -10,4 +10,5 @@ import java.util.List;
 public interface ChatService {
     public List<Chat> getAll();
     public void saveOne(Chat chat);
+    public Chat getOneById(long id);
 }

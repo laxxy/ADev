@@ -3,6 +3,8 @@ package com.audev.common.Entity;
 import com.audev.common.Entity.Annotation.EmailValidation;
 import com.audev.common.Entity.Enums.UserRole;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
@@ -13,6 +15,7 @@ import java.util.List;
 /**
  * Created by cosxt on 28.11.2015.
  */
+@Component
 @Entity
 @Table(name = "user")
 public class User {

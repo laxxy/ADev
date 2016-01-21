@@ -33,28 +33,6 @@ public class RstController {
     @Autowired
     private SubCategoryService subCategoryService;
 
-    @JsonView(SearchCriteria.ViewSearch.class)
-    @RequestMapping(value = "/search")
-    public SearchAjaxResponseBody getSearchResult(@RequestBody SearchCriteria searchCriteria) {
-
-        SearchAjaxResponseBody responseBody = new SearchAjaxResponseBody();
-
-        String msg = searchCriteria.getSearchString();
-
-        if (!msg.isEmpty()) {
-            for (Lot lot : lotService.getAll()) {
-                if (lot.getLotName().startsWith(msg)) {
-                    responseBody.setMessage(lot.getLotName());
-                }
-            }
-            return responseBody;
-        }
-        else {
-            responseBody.setMessage("Enter words here");
-            return responseBody;
-        }
-    }
-
     @JsonView(Lot.Public.class)
     @Transactional
     @RequestMapping(value = "/filter/{input}")
@@ -66,19 +44,14 @@ public class RstController {
             List<Lot> lots = subCategoryService.getOneByName(input).getLots();
             int start = Integer.valueOf(num.replaceAll("[a-zA-Z ={}:\"]+", ""))*10;
             int end = start > lots.size() ? lots.size() : start;
-            for (int i = start -10; i < end; i++) {
-                result.add(lots.get(i));
-            }
+            result.addAll(lots.subList(start -10, end));
             return result;
         }
         else {
-            List<Lot> lots = lotService.getAll();
+            List<Lot> lots = lotService.getBySearch(input);
             int start = Integer.valueOf(num.replaceAll("[a-zA-Z ={}:\"]+", ""))*10;
             int end = start > lots.size() ? lots.size() : start;
-            for (int i = start -10; i < end; i++) {
-                if (lots.get(i).getLotName().equalsIgnoreCase(input) || lots.get(i).getLotName().startsWith(input))
-                    result.add(lots.get(i));
-            }
+            result.addAll(lots.subList(start- 10, end));
             return result;
         }
     }
