@@ -38,24 +38,26 @@ public class ChatTest {
     public void testIn() {
         User user = userService.getUserByEmail("cosxtgx@gmail.com");
         Lot lot = lotService.getOneByName("Name1");
-        user.getLots().add(lot);
+        /*user.getLots().add(lot);
         lot.setUser(user);
         lotService.addOne(lot);
-        userService.addUser(user);
+        userService.addUser(user);*/
 
-        Chat chat = new Chat();
+        Chat chat = chatService.getOneById(1);
 
-        Message message = new Message();
-        message.setMessage("Asd for Test");
-        message.setIsReaded(false);
-        lot.getChats().add(chat);
-        chat.getMessages().add(message);
-        chat.setLot(lot);
-        message.setChat(chat);
-        message.setAuthor(user.getLogin());
-        lotService.addOne(lot);
-        chatService.saveOne(chat);
-        messageService.saveOne(message);
+        for (int i = 0; i < 10; i++) {
+            Message message = new Message();
+            message.setMessage("Asd for Test");
+            message.setIsReaded(false);
+            lot.getChats().add(chat);
+            chat.getMessages().add(message);
+            chat.setLot(lot);
+            message.setChat(chat);
+            message.setAuthor(user.getLogin());
+            lotService.addOne(lot);
+            chatService.saveOne(chat);
+            messageService.saveOne(message);
+        }
 
         //get
 

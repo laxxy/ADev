@@ -142,39 +142,49 @@
       <version>${tiles-version}</version>
     </dependency>
     <!--  -->
+    <!-- <dependency>
+       <groupId>org.thymeleaf.extras</groupId>
+       <artifactId>thymeleaf-extras-tiles2-spring4</artifactId>
+       <version>${thymeleaf-extras-tiles2-version}</version>
+     </dependency>
+     <dependency>
+       <groupId>org.thymeleaf.extras</groupId>
+       <artifactId>thymeleaf-extras-springsecurity4</artifactId>
+       <version>${thymeleaf-extras-springsecurity4-version}</version>
+     </dependency>
+     <dependency>
+       <groupId>org.thymeleaf.extras</groupId>
+       <artifactId>thymeleaf-extras-conditionalcomments</artifactId>
+       <version>${thymeleaf-extras-conditionalcomments-version}</version>
+     </dependency>-->
     <dependency>
-      <groupId>org.thymeleaf.extras</groupId>
-      <artifactId>thymeleaf-extras-tiles2-spring4</artifactId>
-      <version>${thymeleaf-extras-tiles2-version}</version>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.13</version>
     </dependency>
     <dependency>
-      <groupId>org.thymeleaf.extras</groupId>
-      <artifactId>thymeleaf-extras-springsecurity4</artifactId>
-      <version>${thymeleaf-extras-springsecurity4-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.thymeleaf.extras</groupId>
-      <artifactId>thymeleaf-extras-conditionalcomments</artifactId>
-      <version>${thymeleaf-extras-conditionalcomments-version}</version>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>1.7.13</version>
     </dependency>
   </dependencies>
-  <build>
-    <finalName>112</finalName>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        <configuration>
-          <failOnMissingWebXml>false</failOnMissingWebXml>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-</project>
+   <build>
+     <finalName>112</finalName>
+     <plugins>
+       <plugin>
+         <groupId>org.apache.maven.plugins</groupId>
+         <artifactId>maven-war-plugin</artifactId>
+         <configuration>
+           <failOnMissingWebXml>false</failOnMissingWebXml>
+         </configuration>
+       </plugin>
+       <plugin>
+         <artifactId>maven-compiler-plugin</artifactId>
+         <configuration>
+           <source>1.8</source>
+           <target>1.8</target>
+         </configuration>
+       </plugin>
+     </plugins>
+   </build>
+ </project>

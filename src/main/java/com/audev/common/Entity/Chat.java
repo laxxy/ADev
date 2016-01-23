@@ -14,6 +14,7 @@ import java.util.List;
 @Entity
 @Table(name = "chat")
 public class Chat {
+
     @Id
     @GenericGenerator(name = "increment", strategy = "increment")
     @GeneratedValue(generator = "increment")

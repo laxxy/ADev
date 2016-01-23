@@ -1,5 +1,6 @@
 package com.audev.common.Entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -11,6 +12,9 @@ import java.util.Date;
 @Entity
 @Table(name = "message")
 public class Message {
+
+    public interface PublicMessage{}
+
     @Id
     @GenericGenerator(name = "increment", strategy = "increment")
     @GeneratedValue(generator = "increment")
@@ -27,7 +31,7 @@ public class Message {
     @JoinColumn(name = "chat_id", nullable = true)
     private Chat chat;
     @Column(name = "autor_name")
-    private String authorName;
+    private String author;
 
     public Message() {
         date = new Date();
@@ -37,6 +41,7 @@ public class Message {
         return id;
     }
 
+    @JsonView(PublicMessage.class)
     public String getMessage() {
         return message;
     }
@@ -45,6 +50,7 @@ public class Message {
         this.message = message;
     }
 
+    @JsonView(PublicMessage.class)
     public Date getDate() {
         return date;
     }
@@ -53,6 +59,7 @@ public class Message {
         this.date = date;
     }
 
+    @JsonView(PublicMessage.class)
     public boolean isReaded() {
         return isReaded;
     }
@@ -61,12 +68,13 @@ public class Message {
         this.isReaded = isReaded;
     }
 
+    @JsonView(PublicMessage.class)
     public String getAuthor() {
-        return authorName;
+        return author;
     }
 
     public void setAuthor(String authorName) {
-        this.authorName = authorName;
+        this.author = authorName;
     }
 
     public Chat getChat() {

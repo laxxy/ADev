@@ -3,6 +3,7 @@ package com.audev.common.Config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -11,14 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
-import org.thymeleaf.dialect.IDialect;
-import org.thymeleaf.extras.conditionalcomments.dialect.ConditionalCommentsDialect;
-import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
-import org.thymeleaf.extras.tiles2.dialect.TilesDialect;
-import org.thymeleaf.extras.tiles2.spring4.web.view.FlowAjaxThymeleafTilesView;
-import org.thymeleaf.spring4.SpringTemplateEngine;
-import org.thymeleaf.spring4.view.AjaxThymeleafViewResolver;
-import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
+
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -28,6 +22,7 @@ import java.util.Set;
  */
 @Configuration
 @EnableWebMvc
+@EnableAsync
 @ComponentScan("com.audev.common")
 public class WebAppConfig extends WebMvcConfigurerAdapter{
     @Override
@@ -62,7 +57,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter{
         return tilesConfigurer;
     }
 
-    @Bean
+    /*@Bean
     public AjaxThymeleafViewResolver tilesViewResolver() {
         AjaxThymeleafViewResolver viewResolver = new AjaxThymeleafViewResolver();
         viewResolver.setViewClass(FlowAjaxThymeleafTilesView.class);
@@ -90,5 +85,5 @@ public class WebAppConfig extends WebMvcConfigurerAdapter{
         templateResolver.setPrefix("/pages/");
         templateResolver.setTemplateMode("HTML5");
         return templateResolver;
-    }
+    }*/
 }

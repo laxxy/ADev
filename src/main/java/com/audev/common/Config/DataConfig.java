@@ -1,5 +1,8 @@
 package com.audev.common.Config;
 
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +24,7 @@ import java.util.Properties;
  */
 @Configuration
 @EnableTransactionManagement
+@EnableCaching
 @ComponentScan("com.audev.common")
 @EnableJpaRepositories("com.audev.common.Repository")
 public class DataConfig {
@@ -52,6 +56,12 @@ public class DataConfig {
         entityManagerFactoryBean.setJpaProperties(getHibernateProperties());
 
         return entityManagerFactoryBean;
+    }
+
+    @Bean
+    public CacheManager cacheManager() {
+
+        return new ConcurrentMapCacheManager("Message");
     }
 
     @Bean

@@ -24,7 +24,7 @@ public class WebFlowConfig extends AbstractFlowConfiguration {
     @Autowired
     private WebAppConfig webAppConfig;
 
-    @Bean
+    /*@Bean
     public FlowExecutor flowExecutor() {
         return getFlowExecutorBuilder(definitionRegistry())
                 .addFlowExecutionListener(new SecurityFlowExecutionListener(), "*")
@@ -35,8 +35,8 @@ public class WebFlowConfig extends AbstractFlowConfiguration {
     public FlowDefinitionRegistry definitionRegistry() {
         return getFlowDefinitionRegistryBuilder(flowBuilderServices())
                 .setBasePath("/pages")
-                .addFlowLocationPattern("/**/*-flow.xml").build();
-    }
+                .addFlowLocationPattern("/**///*-flow.xml").build();
+    /*}
 
     @Bean
     public FlowBuilderServices flowBuilderServices() {
@@ -53,7 +53,7 @@ public class WebFlowConfig extends AbstractFlowConfiguration {
         mvcViewFactoryCreator.setViewResolvers(Collections.singletonList(this.webAppConfig.tilesViewResolver()));
         mvcViewFactoryCreator.setUseSpringBeanBinding(true);
         return mvcViewFactoryCreator;
-    }
+    }*/
 
     @Bean
     public LocalValidatorFactoryBean validator() {

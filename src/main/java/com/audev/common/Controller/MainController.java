@@ -8,7 +8,6 @@ import com.audev.common.Service.LotService;
 import com.audev.common.Service.SubCategoryService;
 import com.audev.common.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -27,7 +26,6 @@ import java.util.List;
  * Created by cosxt on 04.12.2015.
  */
 @Controller
-@Scope("session")
 @RequestMapping(value = "/")
 public class MainController {
 

@@ -1,79 +1,64 @@
-$(document).ready(function() {
+/**
 
-	function ChatViewModel() {
+ */
+function getMessages(size, name) {
+    $.ajax({
+        type : "POST",
+        contentType : "application/json",
+        url : window.location.href,
+        data : JSON.stringify(size),
+        dataType : 'json',
+        success : function(data) {
+            display(JSON.stringify(data), name);
+            getMessages(size, name)
+        },
+        error : function(e) {
+            getMessages(size, name)
+        },
+        done : function(e) {
+            //console.log("DONE");
+        }
+    });
+}
+function display(data, name) {
 
-		var that = this;
-
-		that.userName = ko.observable('');
-		that.chatContent = ko.observable('');
-		that.message = ko.observable('');
-		that.messageIndex = ko.observable(0);
-		that.activePollingXhr = ko.observable(null);
-		
-		var keepPolling = false;
-
-		that.joinChat = function() {
-			if (that.userName().trim() != '') {
-				keepPolling = true;
-				pollForMessages();
-			}
-		}
-
-		function pollForMessages() {
-			if (!keepPolling) {
-				return;
-			}
-			var form = $("#joinChatForm");
-			that.activePollingXhr($.ajax({url : form.attr("action"), type : "GET", data : form.serialize(),cache: false,
-				success : function(messages) {
-					for ( var i = 0; i < messages.length; i++) {
-						that.chatContent(that.chatContent() + messages[i] + "\n");
-						that.messageIndex(that.messageIndex() + 1);
-					}
-				},
-				error : function(xhr) {
-					if (xhr.statusText != "abort" && xhr.status != 503) {
-						resetUI();
-						console.error("Unable to retrieve chat messages. Chat ended.");
-					}
-				},
-				complete : pollForMessages
-			}));
-			$('#message').focus();
-		}
-
-		that.postMessage = function() {
-			if (that.message().trim() != '') {
-				var form = $("#postMessageForm");
-				$.ajax({url : form.attr("action"), type : "POST",
-				  data : "message=[" + that.userName() + "] " + $("#postMessageForm input[name=message]").val(),
-					error : function(xhr) {
-						console.error("Error posting chat message: status=" + xhr.status + ", statusText=" + xhr.statusText);
-					}
-				});
-				that.message('');
-			}
-		}
-
-		that.leaveChat = function() {
-			that.activePollingXhr(null);
-			resetUI();
-			this.userName('');
-		}
-
-		function resetUI() {
-			keepPolling = false;
-			that.activePollingXhr(null);
-			that.message('');
-			that.messageIndex(0);
-			that.chatContent('');
-		}
-		
-	}
-
-	//Activate knockout.js
-	ko.applyBindings(new ChatViewModel());
-	
-});
-
-
+    var st = jQuery.parseJSON(data);
+    var jmString = "";
+    st.forEach(function(entry){
+        if (entry.author === name) {
+            jmString = jmString+ "<li class='clearfix'>"+
+                    "<div class='message-data align-right'>"+
+                    "<span class='message-data-time'>entry.date</span> &nbsp; &nbsp;"+
+                    "<span class='message-data-name'>entry.author</span> <i class='fa fa-circle me'></i>"+
+                    "</div>"+
+                    "<div class='message other-message float-right'>"+entry.message+"</div>"+
+                    "</li>";
+        }
+        else {
+            jmString = jmString+ "<li>"+
+                    "<div class='message-data'>"+
+                    "<span class='message-data-name'><i class='fa fa-circle online'></i> entry.author</span>"+
+                    "<span class='message-data-time'>entry.date</span>"+
+                    "</div>"+
+                    "<div class='message my-message'>"+entry.message+"</div>"+
+                    "</li>";
+        }
+    });
+    $('#ms-data').html(jmString);
+}
+function postMessage(message) {
+    $.ajax({
+        type : "PUT",
+        contentType : "application/json",
+        url : window.location.href,
+        data : JSON.stringify(message),
+        dataType : 'json',
+        success : function(data) {
+        },
+        error : function(e) {
+        },
+        done : function(e) {
+            //console.log("DONE");
+        }
+    });
+}

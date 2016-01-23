@@ -40,7 +40,7 @@
                 <c:forEach items="${chats}" var="chat">
                 <tr>
                     <td class="cart_product">
-                        <a href=""><img src="images/cart/one.png" alt=""></a>
+                        <a href="/conversations/chat/${chat.id}"><img src="images/cart/one.png" alt=""></a>
                     </td>
                     <td class="cart_description">
                         <h4><a href="">${chat.lot.user.login}</a></h4>
