@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -28,9 +29,6 @@ public class RstController {
 
     @Autowired
     private LotService lotService;
-
-    @Autowired
-    private CategoryService categoryService;
 
     @Autowired
     private SubCategoryService subCategoryService;
@@ -67,6 +65,7 @@ public class RstController {
         }
     }
 
+    //TODO implement sec. here
     @JsonView(Message.PublicMessage.class)
     @RequestMapping(value = "/conversations/chat/{id}", method = RequestMethod.POST)
     public Callable<List<Message>> asyncMessage(@PathVariable String id, @RequestBody String size) throws Exception {
@@ -74,12 +73,18 @@ public class RstController {
         return () -> {
             while (true) {
                 Thread.sleep(400);
-                if (messageService.getAllByChatId(Integer.valueOf(id)).size() > Integer.valueOf(size))
+                if (messageService.getAllByChatId(Integer.valueOf(id)).size() > Integer.valueOf(size)) {
+                    for (Message message : messageService.getAllUnreaded(getUserFromSession().getLogin(), Integer.valueOf(id))) {
+                        message.setIsReaded(true);
+                        messageService.saveOne(message);
+                    }
                     return chatService.getOneById(Integer.valueOf(id)).getMessages();
+                }
             }
         };
     }
 
+    //TODO implement sec. here
     @RequestMapping(value = "/conversations/chat/{id}", method = RequestMethod.PUT)
     public void postMessage(@PathVariable String id, @RequestBody String incomeMessage) {
         Message message = new Message();
@@ -92,6 +97,39 @@ public class RstController {
         chat.getMessages().add(message);
         messageService.saveOne(message);
         chatService.saveOne(chat);
+    }
+
+    @RequestMapping(value = "/lot/{lotid}", method = RequestMethod.POST)
+    public String newChat(@PathVariable String lotid, @RequestBody String message) {
+
+        if (!lotid.isEmpty() && !message.isEmpty()) {
+            Lot currentLot = lotService.getOne(Long.valueOf(lotid));
+            User user = getUserFromSession();
+            if (user.getLots().contains(currentLot)){
+                return "Sorry, you cant write to yourself.";
+            }
+            if (!user.getLots().contains(currentLot)) {
+                Chat chat = new Chat();
+                Message message1 = new Message();
+
+                message1.setAuthor(user.getLogin());
+                message1.setIsReaded(false);
+                message1.setMessage(message);
+                message1.setChat(chat);
+
+                chat.setLot(currentLot);
+                chat.getMessages().add(message1);
+                chatService.saveOne(chat);
+                messageService.saveOne(message1);
+
+                user.getLots().add(currentLot);
+                userService.addUser(user);
+
+                return "done";
+            }
+            else return "You already have active conversation";
+        }
+        return "Please, write something to do that.";
     }
 
     private User getUserFromSession() {

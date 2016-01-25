@@ -28,10 +28,7 @@
                 <thead>
                 <tr class="cart_menu">
                     <td class="chat">Conversations</td>
-                    <td class="description"></td>
-                    <td class="price">Price</td>
-                    <td class="quantity">Quantity</td>
-                    <td class="total">Total</td>
+                    <td class="description">Author</td>
                     <td></td>
                 </tr>
                 </thead>
@@ -40,15 +37,15 @@
                 <c:forEach items="${chats}" var="chat">
                 <tr>
                     <td class="cart_product">
-                        <a href="/conversations/chat/${chat.id}"><img src="images/cart/one.png" alt=""></a>
+                        <a href="/conversations/chat/${chat.id}">Open convarsation</a>
+                        <a>            ${chat.lot.lotName}</a>
                     </td>
                     <td class="cart_description">
                         <h4><a href="">${chat.lot.user.login}</a></h4>
-                        <p>${chat.lot.lotName}</p>
                     </td>
-                    <td class="cart_delete">
+                    <!--<td class="cart_delete">
                         <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-                    </td>
+                    </td>-->
                 </tr>
                 </c:forEach>
                 </tbody>

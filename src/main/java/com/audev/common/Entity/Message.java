@@ -84,4 +84,33 @@ public class Message {
     public void setChat(Chat chat) {
         this.chat = chat;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (this == obj)
+            return true;
+
+        if (!(obj instanceof Message))
+            return false;
+
+        Message message = (Message) obj;
+
+        return
+                this.id == message.id &&
+                        this.message.equals(message.message)&&
+                        this.date.getTime() == message.date.getTime()&&
+                        this.author.equals(message.author)&&
+                        this.chat.getId() == message.id;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 1;
+        hash = hash* 31 + message.hashCode();
+        hash = hash* 31 + date.hashCode();
+        hash = hash* 31 + (int) id;
+        hash = hash* 31 + author.hashCode();
+        return hash;
+    }
 }

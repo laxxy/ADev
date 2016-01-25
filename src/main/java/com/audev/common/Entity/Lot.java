@@ -39,12 +39,12 @@ public class Lot {
     @Column(name = "view_counter")
     private int viewCounter;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id", nullable = false) //TODO change to false after User session attr.
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "lot")
     private List<Chat> chats;
 
-    public Lot() {;
+    public Lot() {
     }
 
     public Lot(SubCategory subCategory) {
@@ -131,5 +131,22 @@ public class Lot {
 
     public void setChats(List<Chat> chats) {
         this.chats = chats;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lot lot = (Lot) o;
+        return Objects.equals(id, lot.id) &&
+                Objects.equals(bidCurrent, lot.bidCurrent) &&
+                Objects.equals(lotName, lot.lotName) &&
+                Objects.equals(lotInfo, lot.lotInfo) &&
+                Objects.equals(dateOfStart, lot.dateOfStart);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, lotName, lotInfo, dateOfStart, bidCurrent, subCategory, user);
     }
 }

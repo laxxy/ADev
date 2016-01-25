@@ -34,4 +34,9 @@ public class MessageServiceImpl implements MessageService {
     public List<Message> getAllByChatId(long id) {
         return messageRepository.getByChatId(id);
     }
+
+    @Override
+    public List<Message> getAllUnreaded(String userLogin, long chatId) {
+        return messageRepository.getAllUnreaded(userLogin, chatId);
+    }
 }

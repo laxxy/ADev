@@ -251,16 +251,17 @@
               <div class="col-sm-12">
                 <p><b>Write to Author</b></p>
 
-                <form action="/submit mess">
-                  <textarea name="" ></textarea>
-                  <b>Rating: </b> <img src="images/product-details/rating.png" alt="" />
-                  <button type="button" class="btn btn-default pull-right">
-                    Submit
-                  </button>
-                </form>
+                <div class="form-group col-md-12">
+                  <textarea name="message" id="message" required="required" class="form-control"
+                            rows="8" placeholder="Your Message Here"></textarea>
+                </div>
+                <div class="form-group col-md-12">
+                  <input type="submit" onclick="postMessage(document.getElementById('message').value)"
+                         class="btn btn-primary pull-right" value="Submit">
+                </div>
+                <div id="result"></div>
               </div>
             </div>
-
           </div>
         </div><!--/category-tab-->
       </div>
@@ -269,6 +270,7 @@
 </section>
 
 <tiles:insertDefinition name="footer"/>
-
+<script src="<c:url value="/assets/core/js/jquery.js"/>"></script>
+<script src="<c:url value="/assets/core/js/lotdetails.js"/>"></script>
 </body>
 </html>

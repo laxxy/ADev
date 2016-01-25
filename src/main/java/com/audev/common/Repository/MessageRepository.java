@@ -15,4 +15,7 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
     @Query("select h from Message h where h.chat.id like :id")
     List<Message> getByChatId(@Param("id") long id);
 
+    @Query("select h from Message h where h.author not like :autor and h.isReaded = false and h.chat.id like :id")
+    List<Message> getAllUnreaded(@Param("autor") String autor, @Param("id") long id);
+
 }

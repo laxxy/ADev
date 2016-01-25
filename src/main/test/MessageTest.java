@@ -44,11 +44,11 @@ public class MessageTest {
 
         Chat chat = chatService.getOneById(1);
 
-        int before = messageService.getAllByChatId(1).size();
-        System.out.println("before"+messageService.getAllByChatId(1).size());
+        //int before = messageService.getAllUnreaded("laxxy").size();
+        //System.out.println("before"+before);
 
 
-
+/*
         final Callable siz = () -> {
             Thread.sleep(10000);
                 Message message = new Message();
@@ -83,6 +83,8 @@ public class MessageTest {
         messageService.saveOne(message);
         chatService.saveOne(chat);
 
-        System.out.println("after"+messageService.getAllByChatId(1).size());
+        System.out.println("after"+messageService.getAllByChatId(1).size());*/
+
+
     }
 }

@@ -11,4 +11,5 @@ public interface MessageService {
     void getAll();
     void saveOne(Message message);
     List<Message> getAllByChatId(long id);
+    List<Message> getAllUnreaded(String userLogin, long chatId);
 }

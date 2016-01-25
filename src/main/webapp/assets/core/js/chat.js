@@ -10,7 +10,7 @@ function getMessages(size, name) {
         dataType : 'json',
         success : function(data) {
             display(JSON.stringify(data), name);
-            getMessages(size, name)
+            getMessages(data.length, name)
         },
         error : function(e) {
             getMessages(size, name)
@@ -28,8 +28,8 @@ function display(data, name) {
         if (entry.author === name) {
             jmString = jmString+ "<li class='clearfix'>"+
                     "<div class='message-data align-right'>"+
-                    "<span class='message-data-time'>entry.date</span> &nbsp; &nbsp;"+
-                    "<span class='message-data-name'>entry.author</span> <i class='fa fa-circle me'></i>"+
+                    "<span class='message-data-time'>" + entry.date + "</span> &nbsp; &nbsp;"+
+                    "<span class='message-data-name'>" + entry.author + "</span> <i class='fa fa-circle me'></i>"+
                     "</div>"+
                     "<div class='message other-message float-right'>"+entry.message+"</div>"+
                     "</li>";
@@ -37,8 +37,8 @@ function display(data, name) {
         else {
             jmString = jmString+ "<li>"+
                     "<div class='message-data'>"+
-                    "<span class='message-data-name'><i class='fa fa-circle online'></i> entry.author</span>"+
-                    "<span class='message-data-time'>entry.date</span>"+
+                    "<span class='message-data-name'><i class='fa fa-circle online'></i>" + entry.author + "</span>"+
+                    "<span class='message-data-time'>" + entry.date + "</span>"+
                     "</div>"+
                     "<div class='message my-message'>"+entry.message+"</div>"+
                     "</li>";
