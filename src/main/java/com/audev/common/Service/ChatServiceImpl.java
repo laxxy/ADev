@@ -21,7 +21,10 @@ public class ChatServiceImpl implements ChatService {
         return chatRepository.findAll();
     }
 
-
+    @Override
+    public List<Chat> getChatsByUserId(long id) {
+        return chatRepository.getChatsByUserId(id);
+    }
 
     @Override
     public void saveOne(Chat chat) {

@@ -99,6 +99,14 @@ public class RstController {
         chatService.saveOne(chat);
     }
 
+    @RequestMapping(value = "/conversations", method = RequestMethod.POST)
+    public Callable<String> asyncMessageCheck() {
+
+        //List<Chat> =
+
+        return null;
+    }
+
     @RequestMapping(value = "/lot/{lotid}", method = RequestMethod.POST)
     public String newChat(@PathVariable String lotid, @RequestBody String message) {
 

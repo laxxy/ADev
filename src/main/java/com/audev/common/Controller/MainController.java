@@ -49,14 +49,6 @@ public class MainController {
         return "index";
     }
 
-    @RequestMapping(value = "/login")
-    public String printLogin(Model model) {
-
-        model.addAttribute(new User());
-
-        return "login";
-    }
-
     @RequestMapping(value = "/panel")
     public String printPanel(ModelMap modelMap) {
 
@@ -73,6 +65,14 @@ public class MainController {
     public String printPanelChat() {
 
         return "chat";
+    }
+
+    @RequestMapping(value = "/login")
+    public String printLogin(Model model) {
+
+        model.addAttribute(new User());
+
+        return "login";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -122,6 +122,15 @@ public class MainController {
         modelMap.addAttribute("lot", lot);
 
         return "lotdetails";
+    }
+
+    @RequestMapping(value = "/new", method = RequestMethod.GET)
+    public String newLot(Model model) {
+
+        model.addAttribute(new Lot());
+        model.addAttribute("user", getUserFromSession());
+
+        return "newlot";
     }
 
     private static String encrypt(String x) throws Exception {

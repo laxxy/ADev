@@ -45,6 +45,7 @@ public class Lot {
     private List<Chat> chats;
 
     public Lot() {
+        dateOfStart = new Date();
     }
 
     public Lot(SubCategory subCategory) {
