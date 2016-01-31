@@ -10,7 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 /**
- * Created by cosxt on 20.10.2015.
+ *
  */
 public class MainConfig implements WebApplicationInitializer {
 
@@ -20,6 +20,7 @@ public class MainConfig implements WebApplicationInitializer {
 
         ct.register(WebAppConfig.class);
         ct.register(DataConfig.class);
+        ct.register(ReactorRestServer.class);
 
         servletContext.addListener(new ContextLoaderListener(ct));
 

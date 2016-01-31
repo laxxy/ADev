@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 
 /**
- * Created by cosxt on 28.01.2016.
+ * A helper class that contains the necessary Consumers for handling HTTP requests.
  */
 public class ImageThumbnailerRestApi {
 

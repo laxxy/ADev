@@ -23,7 +23,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 /**
- * Created by cosxt on 04.12.2015.
+ * Main controller
  */
 @Controller
 @RequestMapping(value = "/")
@@ -41,6 +41,11 @@ public class MainController {
     @Autowired
     private SubCategoryService subCategoryService;
 
+    /**
+     *
+     * @param model -> ins. attributes
+     * @return start page
+     */
     @RequestMapping(value = "/")
     public String printMain(Model model) {
 
@@ -49,9 +54,15 @@ public class MainController {
         return "index";
     }
 
+    /**
+     *
+     * @param modelMap -> ins. attributes
+     * @return user panel
+     */
     @RequestMapping(value = "/panel")
     public String printPanel(ModelMap modelMap) {
 
+        //TODO rewrite, ret. panel?
         if (getUserFromSession() == null) {
             return "panel";
         }
@@ -61,12 +72,11 @@ public class MainController {
         return "panel";
     }
 
-    @RequestMapping(value = "/panel/chat")
-    public String printPanelChat() {
-
-        return "chat";
-    }
-
+    /**
+     *
+     * @param model -> ins. attributes
+     * @return login page
+     */
     @RequestMapping(value = "/login")
     public String printLogin(Model model) {
 
@@ -75,6 +85,14 @@ public class MainController {
         return "login";
     }
 
+    /**
+     *
+     * @param user -> user with filed data
+     * @param bindingResult -> BindingResult
+     * @param modelMap- > ins. attributes
+     * @return login page
+     * @throws Exception
+     */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String printRegister(@Valid User user, BindingResult bindingResult, ModelMap modelMap) throws Exception {
 
@@ -90,6 +108,12 @@ public class MainController {
         return "login";
     }
 
+    /**
+     *
+     * @param input -> contains search words or category name
+     * @param modelMap -> ins. attributes
+     * @return founded results page
+     */
     @Transactional
     @RequestMapping(value = "/filter/{input}", method = RequestMethod.GET)
     public String printFilterPage(@PathVariable String input, ModelMap modelMap) {
@@ -102,7 +126,7 @@ public class MainController {
         else {
             lotlist = lotService.getBySearch(input);
         }
-
+        // 10 fields per page
         int size = lotlist.size()%10 == 0 ? lotlist.size()/10 : (lotlist.size()/10) + 1;
 
         if (size <= 0) {
@@ -114,6 +138,12 @@ public class MainController {
         return "main";
     }
 
+    /**
+     *
+     * @param lotid -> lot id
+     * @param modelMap -> ins. attributes
+     * @return -> page with lot details(by id)
+     */
     @RequestMapping(value = "/lot/{lotid}", method = RequestMethod.GET)
     public String findLot(@PathVariable String lotid, ModelMap modelMap) {
 

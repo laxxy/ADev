@@ -2,7 +2,6 @@ package com.audev.common.Controller;
 
 import com.audev.common.Entity.Chat;
 import com.audev.common.Entity.Lot;
-import com.audev.common.Entity.Message;
 import com.audev.common.Entity.User;
 import com.audev.common.Service.ChatService;
 import com.audev.common.Service.MessageService;
@@ -18,9 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by laxxy on 21.01.16.
+ * Message processing
+ *
  */
-
 @Controller
 @RequestMapping("/conversations")
 public class ChatController {
@@ -34,6 +33,11 @@ public class ChatController {
     @Autowired
     private UserService userService;
 
+    /**
+     * Print conversations page with active conversations
+     * @param modelMap -> ins. attributes
+     * @return conversations page
+     */
     @RequestMapping
     public String printConversations(ModelMap modelMap) {
 
@@ -53,6 +57,13 @@ public class ChatController {
         else return "redirect:/";
     }
 
+    /**
+     * Print chat page by id
+     * @param id -> chat id
+     * @param modelMap -> ins. attributes
+     * @return chat page
+     */
+    //TODO ins. secur. !!!
     @RequestMapping(value = "/chat/{id}")
     public String printChat(@PathVariable String id, ModelMap modelMap) {
 
@@ -65,6 +76,10 @@ public class ChatController {
         return "chat";
     }
 
+    /**
+     * Return user from current session
+     * @return User
+     */
     private User getUserFromSession() {
         UserDetails userDetails;
         if (!SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {

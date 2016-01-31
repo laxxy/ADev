@@ -12,10 +12,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 
-
-
 /**
- * Created by cosxt on 28.10.2015.
+ *
  */
 @Configuration
 @EnableWebMvc
@@ -29,6 +27,10 @@ public class WebAppConfig extends WebMvcConfigurerAdapter{
         registry.addResourceHandler("/pages/**").addResourceLocations("/pages/");
     }
 
+    /**
+     * AsyncSupport
+     * @param configurer -> set timeout
+     */
     @Override
     public void configureAsyncSupport(AsyncSupportConfigurer configurer) {
         configurer.setDefaultTimeout(60*1000L);
@@ -45,6 +47,10 @@ public class WebAppConfig extends WebMvcConfigurerAdapter{
         return ir;
     }
 
+    /**
+     * Tiles Configuration
+     * @return TilesConfigurer
+     */
     @Bean
     public TilesConfigurer tilesConfigurer() {
 

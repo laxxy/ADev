@@ -20,7 +20,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 /**
- * Created by cosxt on 29.11.2015.
+ *
  */
 @Configuration
 @EnableTransactionManagement
@@ -29,6 +29,10 @@ import java.util.Properties;
 @EnableJpaRepositories("com.audev.common.Repository")
 public class DataConfig {
 
+    /**
+     *
+     * @return DriverManagerDataSource
+     */
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
@@ -58,12 +62,21 @@ public class DataConfig {
         return entityManagerFactoryBean;
     }
 
+    /**
+     * Cache inclusion
+     * @return CacheManager
+     */
     @Bean
     public CacheManager cacheManager() {
 
         return new ConcurrentMapCacheManager("Message");
     }
 
+    /**
+     *
+     * @param entityManagerFactory
+     * @return JpaTransactionManager
+     */
     @Bean
     public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
 
@@ -73,6 +86,10 @@ public class DataConfig {
         return transactionManager;
     }
 
+    /**
+     * Hibernate properties
+     * @return Properties
+     */
     private Properties getHibernateProperties() {
 
         Properties properties = new Properties();

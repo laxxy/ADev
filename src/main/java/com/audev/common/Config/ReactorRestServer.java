@@ -26,7 +26,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import static reactor.event.selector.Selectors.$;
 
 /**
- * Created by cosxt on 30.01.2016.
+ * Reactor+Netty-based REST API server for thumbnailing uploaded images.
  */
 @Configuration
 @EnableReactor
@@ -83,6 +83,7 @@ public class ReactorRestServer {
         return server;
     }
 
+    // Reactor's TCP servers are non-blocking so we have to do something to keep from exiting the main thread
     @Bean
     public CountDownLatch closeLatch() {
         return new CountDownLatch(1);
