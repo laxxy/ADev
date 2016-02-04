@@ -1,15 +1,8 @@
 import com.audev.common.Config.DataConfig;
-import com.audev.common.Entity.Category;
-import com.audev.common.Entity.Lot;
-import com.audev.common.Entity.SubCategory;
-import com.audev.common.Entity.User;
-import com.audev.common.Model.SearchCriteria;
 import com.audev.common.Service.CategoryService;
 import com.audev.common.Service.LotService;
 import com.audev.common.Service.SubCategoryService;
-import com.audev.common.Service.UserService;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +11,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
 
 /**
  * Created by cosxt on 01.12.2015.

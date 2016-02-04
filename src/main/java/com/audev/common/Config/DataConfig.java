@@ -1,5 +1,6 @@
 package com.audev.common.Config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
@@ -8,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -31,10 +33,13 @@ import java.util.Properties;
 @EnableJpaRepositories("com.audev.common.Repository")
 public class DataConfig {
 
-
-    private static final String PROP_DATABASE_PASSWORD = "db.password";
-    private static final String PROP_DATABASE_USERNAME = "db.username";
-
+    //for deploy
+    @Value("${db.password}")
+    private String PROP_DATABASE_PASSWORD;
+    @Value("${db.username}")
+    private String PROP_DATABASE_USERNAME;
+    private static final String PROP_DATABASE_URL_LOCAL = "jdbc:mysql://localhost:3306/db_one";
+    private static final String PROP_DATABASE_URL_REMOTE = "jdbc:mysql://laxx.cl3o3ovtot7v.us-west-2.rds.amazonaws.com:3306/db_one";
     /**
      *
      * @return DriverManagerDataSource
@@ -44,9 +49,9 @@ public class DataConfig {
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
 
         driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/db_one");
-        driverManagerDataSource.setUsername("root");
-        driverManagerDataSource.setPassword("root");
+        driverManagerDataSource.setUrl(PROP_DATABASE_URL_REMOTE);
+        driverManagerDataSource.setUsername(PROP_DATABASE_USERNAME);
+        driverManagerDataSource.setPassword(PROP_DATABASE_PASSWORD);
         return driverManagerDataSource;
     }
 
@@ -90,6 +95,11 @@ public class DataConfig {
         transactionManager.setEntityManagerFactory(entityManagerFactory);
 
         return transactionManager;
+    }
+
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
+        return new PropertySourcesPlaceholderConfigurer();
     }
 
     /**

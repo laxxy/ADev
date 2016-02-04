@@ -4,12 +4,8 @@ import com.audev.common.Entity.Chat;
 import com.audev.common.Entity.Lot;
 import com.audev.common.Entity.Message;
 import com.audev.common.Entity.User;
-import com.audev.common.Model.SearchAjaxResponseBody;
-import com.audev.common.Model.SearchCriteria;
 import com.audev.common.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Callable;
 

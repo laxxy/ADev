@@ -1,7 +1,4 @@
 import com.audev.common.Config.DataConfig;
-import com.audev.common.Entity.Message;
-import com.audev.common.Entity.User;
-import com.audev.common.Model.SearchCriteria;
 import com.audev.common.Service.LotService;
 import com.audev.common.Service.MessageService;
 import com.audev.common.Service.UserService;
