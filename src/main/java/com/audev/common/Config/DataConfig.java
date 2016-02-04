@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -26,8 +27,13 @@ import java.util.Properties;
 @EnableTransactionManagement
 @EnableCaching
 @ComponentScan("com.audev.common")
+@PropertySource("classpath:db.properties")
 @EnableJpaRepositories("com.audev.common.Repository")
 public class DataConfig {
+
+
+    private static final String PROP_DATABASE_PASSWORD = "db.password";
+    private static final String PROP_DATABASE_USERNAME = "db.username";
 
     /**
      *
