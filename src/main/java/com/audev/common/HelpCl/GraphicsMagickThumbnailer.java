@@ -1,4 +1,4 @@
-package com.audev.common.HelpCl;
+/*package com.audev.common.HelpCl;
 
 import org.gm4java.engine.support.GMConnectionPoolConfig;
 import org.gm4java.engine.support.PooledGMService;
@@ -15,6 +15,7 @@ import java.nio.file.Path;
 /**
  * Created by cosxt on 30.01.2016.
  */
+/*
 public class GraphicsMagickThumbnailer implements Function<Event<Path>, Path> {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
@@ -57,4 +58,4 @@ public class GraphicsMagickThumbnailer implements Function<Event<Path>, Path> {
         }
     }
 
-}
+}*/

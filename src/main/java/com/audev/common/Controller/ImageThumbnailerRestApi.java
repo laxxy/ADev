@@ -1,4 +1,4 @@
-package com.audev.common.Controller;
+/*package com.audev.common.Controller;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.handler.codec.http.*;
@@ -17,7 +17,7 @@ import java.util.concurrent.atomic.AtomicReference;
 /**
  * A helper class that contains the necessary Consumers for handling HTTP requests.
  */
-public class ImageThumbnailerRestApi {
+/*public class ImageThumbnailerRestApi {
 
     public static final String IMG_THUMBNAIL_URI = "/image/thumbnail.jpg";
     public static final String THUMBNAIL_REQ_URI = "/thumbnail";
@@ -112,3 +112,4 @@ public class ImageThumbnailerRestApi {
         return resp;
     }
 }
+*/
