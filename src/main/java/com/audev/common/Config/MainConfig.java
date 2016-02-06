@@ -20,7 +20,6 @@ public class MainConfig implements WebApplicationInitializer {
 
         ct.register(WebAppConfig.class);
         ct.register(DataConfig.class);
-        ct.register(ReactorRestServer.class);
 
         servletContext.addListener(new ContextLoaderListener(ct));
 

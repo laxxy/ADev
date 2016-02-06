@@ -1,4 +1,4 @@
-package com.audev.common.Config;
+/*package com.audev.common.Config;
 
 import com.audev.common.Controller.ImageThumbnailerRestApi;
 import com.audev.common.HelpCl.GraphicsMagickThumbnailer;
@@ -28,6 +28,7 @@ import static reactor.event.selector.Selectors.$;
 /**
  * Reactor+Netty-based REST API server for thumbnailing uploaded images.
  */
+/*
 @Configuration
 @EnableReactor
 public class ReactorRestServer {
@@ -88,4 +89,4 @@ public class ReactorRestServer {
     public CountDownLatch closeLatch() {
         return new CountDownLatch(1);
     }
-}
+}*/
