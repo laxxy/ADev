@@ -4,6 +4,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -59,5 +61,12 @@ public class WebAppConfig extends WebMvcConfigurerAdapter{
         tilesConfigurer.setCheckRefresh(true);
 
         return tilesConfigurer;
+    }
+
+    @Bean
+    public MultipartResolver multipartResolver() {
+        CommonsMultipartResolver rez = new CommonsMultipartResolver();
+        rez.setMaxUploadSize(500000);
+        return rez;
     }
 }

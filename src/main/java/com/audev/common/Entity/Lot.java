@@ -6,6 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 import java.util.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 /**
  * Created by cosxt on 28.11.2015.
@@ -21,8 +22,10 @@ public class Lot {
     @GenericGenerator(name= "increment", strategy= "increment")
     @Column(name = "lot_id")
     private long id;
+    @Size(min = 1, max = 40, message = "Sorry, name must have at least 1 dig.")
     @Column(name = "name")
     private String lotName;
+    @Size(min = 1, message = "Please, enter information about your lot")
     @Column(name = "lot_info")
     private String lotInfo;
     @Temporal(TemporalType.DATE)
@@ -43,6 +46,8 @@ public class Lot {
     private User user;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "lot")
     private List<Chat> chats;
+    @Column(name = "images")
+    ArrayList<String> images;
 
     public Lot() {
         dateOfStart = new Date();
@@ -132,6 +137,14 @@ public class Lot {
 
     public void setChats(List<Chat> chats) {
         this.chats = chats;
+    }
+
+    public ArrayList<String> getImages() {
+        return images;
+    }
+
+    public void setImages(ArrayList<String> images) {
+        this.images = images;
     }
 
     @Override

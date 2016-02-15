@@ -36,66 +36,79 @@
     <div class="step-one">
       <h2 class="heading">Step1</h2>
     </div>
-
-    <div class="shopper-informations">
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="shopper-info">
-            <p>New lot information</p>
-            <form>
-              <input type="text" placeholder="Name">
-              <form>
-                <input type="text" placeholder="Category*">
-                <select>
-                  <option>-- Category --</option>
-                  <option>United States</option>
-                  <option>Bangladesh</option>
-                  <option>UK</option>
-                  <option>India</option>
-                  <option>Pakistan</option>
-                  <option>Ucrane</option>
-                  <option>Canada</option>
-                  <option>Dubai</option>
-                </select>
-              </form>
-            </form>
-          </div>
-        </div>
-        <div class="col-sm-5 clearfix">
-          <div class="info">
-            <p>Bill To</p>
-            <div class="form-one">
-              <form>
-                <input type="text" placeholder="${user.firstName}*">
-                <input type="text" placeholder="${user.email}*">
-                <input type="text" placeholder="${user.telephone}*">
-                <input type="text" placeholder="Skype*">
-              </form>
-            </div>
-            <div class="form-two">
-              <div class="form-group">
-                <label for="InputFile1">File input</label>
-                <input type="file" id="InputFile1">
-                <p class="help-block"></p>
-                <label for="InputFile2">File input</label>
-                <input type="file" id="InputFile2">
-                <p class="help-block"></p>
-                <label for="InputFile3">File input</label>
-                <input type="file" id="InputFile3">
-                <p class="help-block"></p>
+    <form:form method="post" commandName="lot" modelAttribute="lot" action="/new" enctype="multipart/form-data">
+      <div class="shopper-informations">
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="shopper-info">
+              <p>New lot information</p>
+              <form:input path="lotName" placeholder="Lot name" cssClass="form-control"/>
+              <h2>Select Category</h2>
+              <div class="container">
+                <div class="row" id="drop">
+                  <div class="dropdown" id="select">
+                    <a id="dLabel" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#">
+                      Dropdown <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                    <c:forEach items="${categories}" var="category">
+                      <li class="dropdown-submenu">
+                        <a tabindex="-1" href="#">${category.name}</a>
+                        <ul class="dropdown-menu">
+                          <c:forEach items="${category.subCategories}" var="subcategory">
+                          <li><a tabindex="-1" onclick="selectCategory('${subcategory.name}')">${subcategory.name}</a></li>
+                          </c:forEach>
+                        </ul>
+                      </li>
+                    </c:forEach>
+                      <script>
+                        function selectCategory(name) {
+                          document.getElementById("select").remove();
+                          $('#drop').append('<input name="subname" value="'+name+'" readonly/>');
+                        }
+                      </script>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="order-message">
-            <p>Information</p>
-            <textarea name="message" placeholder="Notes about your lot" rows="16"></textarea>
+          <div class="col-sm-5 clearfix">
+              <div class="info">
+                <p>User information</p>
+                <div class="form-one">
+                  <form>
+                    <form:label path="user" cssClass="form-control">${user.firstName}*</form:label>
+                    <form:label path="user" cssClass="form-control">${user.email}*</form:label>
+                    <form:label path="user" cssClass="form-control">${user.telephone}*</form:label>
+                    <form:label path="user" cssClass="form-control">Skype*</form:label>
+                  </form>
+                </div>
+                <div class="form-two">
+                  <div class="form-group">
+                    <label for="image1">File input</label>
+                    <input type="file" name="image1" id="image1">
+                    <p class="help-block"></p>
+                    <label for="image2">File input</label>
+                    <input type="file" name="image2" id="image2">
+                    <p class="help-block"></p>
+                    <label for="image3">File input</label>
+                    <input type="file" name="image3" id="image3">
+                    <p class="help-block"></p>
+                  </div>
+                </div>
+              </div>
           </div>
+          <div class="col-sm-4">
+            <div class="order-message">
+              <p>Information</p>
+              <textarea name="message" placeholder="Notes about your lot" rows="16"></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
         </div>
-        <a class="btn btn-primary" href="">Continue</a>
       </div>
-    </div>
+    </form:form>
   </div>
 </section>
 

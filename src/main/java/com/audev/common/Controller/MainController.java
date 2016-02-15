@@ -2,11 +2,20 @@ package com.audev.common.Controller;
 
 import com.audev.common.Entity.Enums.UserRole;
 import com.audev.common.Entity.Lot;
+import com.audev.common.Entity.SubCategory;
 import com.audev.common.Entity.User;
 import com.audev.common.Service.CategoryService;
 import com.audev.common.Service.LotService;
 import com.audev.common.Service.SubCategoryService;
 import com.audev.common.Service.UserService;
+import org.jets3t.service.S3Service;
+import org.jets3t.service.acl.AccessControlList;
+import org.jets3t.service.acl.GroupGrantee;
+import org.jets3t.service.acl.Permission;
+import org.jets3t.service.impl.rest.httpclient.RestS3Service;
+import org.jets3t.service.model.S3Bucket;
+import org.jets3t.service.model.S3Object;
+import org.jets3t.service.security.AWSCredentials;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,8 +27,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import sun.awt.image.ImageFormatException;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.ByteArrayInputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -154,15 +169,61 @@ public class MainController {
         return "lotdetails";
     }
 
+    /**
+     *
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String newLot(Model model) {
 
         model.addAttribute(new Lot());
+        model.addAttribute("categories", categoryService.getAll());
         model.addAttribute("user", getUserFromSession());
 
         return "newlot";
     }
 
+    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    public String postNew(@Valid Lot lot,  BindingResult bindingResult,
+                          HttpServletRequest httpServletRequest,
+                          @RequestParam(value = "image1", required = false)MultipartFile image1,
+                          @RequestParam(value = "image2", required = false)MultipartFile image2,
+                          @RequestParam(value = "image3", required = false)MultipartFile image3) {
+
+        if (bindingResult.hasErrors())
+            return "newlot";
+
+        if (!image1.isEmpty() && !image2.isEmpty() && !image3.isEmpty()) {
+
+            ArrayList<String> images = new ArrayList<>();
+            try {
+                validateImage(image1);
+                validateImage(image2);
+                validateImage(image3);
+            } catch (ImageFormatException e) {
+                bindingResult.reject(e.getMessage());
+                return "newlot";
+            }
+
+            images.add(saveImage(image1, image1.getOriginalFilename()));
+            images.add(saveImage(image2, image2.getOriginalFilename()));
+            images.add(saveImage(image3, image3.getOriginalFilename()));
+
+            lot.setImages(images);
+        }
+        lot.setSubCategory(subCategoryService.getOneByName(httpServletRequest.getParameter("subname")));
+        lot.setUser(getUserFromSession());
+        lotService.addOne(lot);
+        return "newlot";
+    }
+
+    /**
+     *
+     * @param x
+     * @return
+     * @throws Exception
+     */
     private static String encrypt(String x) throws Exception {
         java.security.MessageDigest d;
         d = java.security.MessageDigest.getInstance("SHA-1");
@@ -171,6 +232,11 @@ public class MainController {
         return byteArrayToHexString(d.digest());
     }
 
+    /**
+     *
+     * @param b
+     * @return
+     */
     private static String byteArrayToHexString(byte[] b) {
 
         String result = "";
@@ -181,6 +247,10 @@ public class MainController {
         return result;
     }
 
+    /**
+     *
+     * @return
+     */
     private User getUserFromSession() {
         UserDetails userDetails;
         if (!SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
@@ -188,5 +258,52 @@ public class MainController {
             return userService.getUserByEmail(userDetails.getUsername());
         }
         else return null;
+    }
+
+    /**
+     *
+     * @param image
+     * @param filename
+     * @return
+     */
+    private String saveImage(MultipartFile image, String filename) {
+        String rez = null;
+        try {
+            AWSCredentials credentials = new AWSCredentials("",
+                    "nWC3/");
+            S3Service s3 = new RestS3Service(credentials);
+
+            S3Bucket imgB = s3.getBucket("rezb");
+            S3Object imgO = new S3Object(filename);
+
+
+            imgO.setDataInputStream(new ByteArrayInputStream(image.getBytes()));
+            imgO.setContentLength(image.getBytes().length);
+            imgO.setContentType("image/jpeg");
+
+            AccessControlList ac1 = new AccessControlList();
+            ac1.setOwner(imgB.getOwner());
+            ac1.grantPermission(GroupGrantee.ALL_USERS, Permission.PERMISSION_READ);
+            imgO.setAcl(ac1);
+
+            s3.putObject(imgB, imgO);
+            rez = "https://s3.eu-central-1.amazonaws.com/rezb/" + filename;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return rez;
+    }
+
+    /**
+     *
+     * @param image ->
+     * @throws ImageFormatException
+     */
+    private void validateImage(MultipartFile image) throws ImageFormatException {
+
+        if (!image.getContentType().equals("image/jpeg")){
+            throw new ImageFormatException("Wrong format");
+        }
     }
 }

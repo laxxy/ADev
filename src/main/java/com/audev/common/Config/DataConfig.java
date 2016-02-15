@@ -49,9 +49,9 @@ public class DataConfig {
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
 
         driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        driverManagerDataSource.setUrl(PROP_DATABASE_URL_REMOTE);
-        driverManagerDataSource.setUsername(PROP_DATABASE_USERNAME);
-        driverManagerDataSource.setPassword(PROP_DATABASE_PASSWORD);
+        driverManagerDataSource.setUrl(PROP_DATABASE_URL_LOCAL);
+        driverManagerDataSource.setUsername("root");
+        driverManagerDataSource.setPassword("root");
         return driverManagerDataSource;
     }
 

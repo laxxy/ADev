@@ -15,7 +15,6 @@ import java.util.List;
 /**
  * Created by cosxt on 28.11.2015.
  */
-@Component
 @Entity
 @Table(name = "user")
 public class User {
