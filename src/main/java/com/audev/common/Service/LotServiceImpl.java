@@ -44,4 +44,9 @@ public class LotServiceImpl implements LotService {
     public Lot getOneByName(String name) {
         return lotRepository.findBylotName(name);
     }
+
+    @Override
+    public List<Lot> getLastSix() {
+        return lotRepository.getLastSix();
+    }
 }

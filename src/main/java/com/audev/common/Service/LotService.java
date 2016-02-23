@@ -8,11 +8,12 @@ import java.util.List;
  * Created by cosxt on 01.12.2015.
  */
 public interface LotService {
-    public Lot getOne(long id);
-    public Lot getOneByName(String name);
-    public List<Lot> getAll();
-    public void deleteOne(long id);
-    public void updateOne(long id);
-    public void addOne(Lot lot);
-    public List<Lot> getBySearch(String s);
+    Lot getOne(long id);
+    Lot getOneByName(String name);
+    List<Lot> getAll();
+    List<Lot> getLastSix();
+    void deleteOne(long id);
+    void updateOne(long id);
+    void addOne(Lot lot);
+    List<Lot> getBySearch(String s);
 }

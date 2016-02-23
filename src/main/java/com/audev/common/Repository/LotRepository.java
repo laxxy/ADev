@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 /**
- * Created by cosxt on 01.12.2015.
+ *
  */
 public interface LotRepository extends JpaRepository<Lot, Long> {
 
@@ -16,5 +16,8 @@ public interface LotRepository extends JpaRepository<Lot, Long> {
 
     @Query("select h from Lot h where lower(h.lotName) like CONCAT(:pattern,'%')")
     List<Lot> findBySearchString(@Param("pattern") String pattern);
+
+    @Query(value = "select * from lot order by lot_id desc limit 6", nativeQuery = true)
+    List<Lot> getLastSix();
 
 }

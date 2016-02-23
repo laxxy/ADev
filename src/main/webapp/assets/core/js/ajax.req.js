@@ -37,16 +37,15 @@ function display(data) {
     st.forEach(function(entry){
         jmString = jmString +
             "<li class=media>" +
-                "<a class=pull-left href=#>"+
-                "<img class=media-object src='' alt=''>"+
+                "<a class=pull-left href=/lot/" + entry.id  +">"+
+                "<img class=media-object src='/assets/core/images/home/empty_cart.png'  alt=''>"+
                 "</a>"+
                 "<div class=media-body>"+
                 "<ul class=sinlge-post-meta>"+
-                /*"<li><i class='fa fa-user'></i>" + entry.user.login + "</li>"+*/
                 "<li><i class='fa fa-clock-o'></i>" + entry.dateOfStart + "</li>"+
-                "<li><i class='fa fa-calendar'></i>" + entry.bidCurrent + "</li>"+
                 "</ul>"+
                 "<p>"+entry.lotName+"<p>"+
+                "<p><h1>"+entry.bidCurrent+" usd.</h1><p>"+
                 "<a class='btn btn-primary' href=/lot/" + entry.id+
                 "><i class='fa fa-reply'></i>More</a>"+
                 "</div>"+

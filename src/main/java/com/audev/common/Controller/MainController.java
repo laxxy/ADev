@@ -2,7 +2,6 @@ package com.audev.common.Controller;
 
 import com.audev.common.Entity.Enums.UserRole;
 import com.audev.common.Entity.Lot;
-import com.audev.common.Entity.SubCategory;
 import com.audev.common.Entity.User;
 import com.audev.common.Service.CategoryService;
 import com.audev.common.Service.LotService;
@@ -65,7 +64,8 @@ public class MainController {
     public String printMain(Model model) {
 
         model.addAttribute("category", categoryService.getAll());
-
+        model.addAttribute("recommended1", lotService.getLastSix().subList(0,3));
+        //model.addAttribute("recommended2", lotService.getLastSix().subList(2,5));
         return "index";
     }
 
@@ -77,13 +77,12 @@ public class MainController {
     @RequestMapping(value = "/panel")
     public String printPanel(ModelMap modelMap) {
 
+        final User user = getUserFromSession();
         //TODO rewrite, ret. panel?
-        if (getUserFromSession() == null) {
+        if (user == null) {
             return "panel";
         }
-
-        List<Lot> lots = getUserFromSession().getLots();
-        modelMap.addAttribute("lots", lots);
+        modelMap.addAttribute("lots", user.getLots());
         return "panel";
     }
 
@@ -184,6 +183,8 @@ public class MainController {
         return "newlot";
     }
 
+
+    @Transactional
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     public String postNew(@Valid Lot lot,  BindingResult bindingResult,
                           HttpServletRequest httpServletRequest,
@@ -194,9 +195,10 @@ public class MainController {
         if (bindingResult.hasErrors())
             return "newlot";
 
+        ArrayList<String> images = new ArrayList<>();
+
         if (!image1.isEmpty() && !image2.isEmpty() && !image3.isEmpty()) {
 
-            ArrayList<String> images = new ArrayList<>();
             try {
                 validateImage(image1);
                 validateImage(image2);
@@ -205,13 +207,13 @@ public class MainController {
                 bindingResult.reject(e.getMessage());
                 return "newlot";
             }
-
             images.add(saveImage(image1, image1.getOriginalFilename()));
             images.add(saveImage(image2, image2.getOriginalFilename()));
             images.add(saveImage(image3, image3.getOriginalFilename()));
-
-            lot.setImages(images);
         }
+        //TODO this throws Data truncation: Data too long for column 'images' at row 1
+        //but test work(
+        lot.setImages(images);
         lot.setSubCategory(subCategoryService.getOneByName(httpServletRequest.getParameter("subname")));
         lot.setUser(getUserFromSession());
         lotService.addOne(lot);
@@ -249,7 +251,7 @@ public class MainController {
 
     /**
      *
-     * @return
+     * @return current user
      */
     private User getUserFromSession() {
         UserDetails userDetails;
@@ -264,7 +266,7 @@ public class MainController {
      *
      * @param image
      * @param filename
-     * @return
+     * @return file path
      */
     private String saveImage(MultipartFile image, String filename) {
         String rez = null;

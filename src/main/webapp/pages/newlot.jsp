@@ -43,12 +43,13 @@
             <div class="shopper-info">
               <p>New lot information</p>
               <form:input path="lotName" placeholder="Lot name" cssClass="form-control"/>
+              <form:errors path="lotName" cssClass="alert-danger" />
               <h2>Select Category</h2>
               <div class="container">
                 <div class="row" id="drop">
                   <div class="dropdown" id="select">
                     <a id="dLabel" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#">
-                      Dropdown <span class="caret"></span>
+                      Category <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
                     <c:forEach items="${categories}" var="category">
@@ -95,6 +96,7 @@
                     <label for="image3">File input</label>
                     <input type="file" name="image3" id="image3">
                     <p class="help-block"></p>
+                    <form:errors path="images" cssClass="alert-danger" />
                   </div>
                 </div>
               </div>
@@ -102,7 +104,7 @@
           <div class="col-sm-4">
             <div class="order-message">
               <p>Information</p>
-              <textarea name="message" placeholder="Notes about your lot" rows="16"></textarea>
+              <form:textarea path="lotInfo" placeholder="Notes about your lot" rows="16" cssClass="text-area"/>
             </div>
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
