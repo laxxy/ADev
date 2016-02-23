@@ -108,11 +108,14 @@ public class RstController {
         if (!lotid.isEmpty() && !message.isEmpty()) {
             Lot currentLot = lotService.getOne(Long.valueOf(lotid));
             User user = getUserFromSession();
+            //TODO rewrite to user -> chats
             if (user.getLots().contains(currentLot)){
                 return "Sorry, you cant write to yourself.";
             }
+            //TODO rewrite to user -> chats
             if (!user.getLots().contains(currentLot)) {
                 Chat chat = new Chat();
+                chat.getUsers().add(user);
                 Message message1 = new Message();
 
                 message1.setAuthor(user.getLogin());
@@ -125,7 +128,7 @@ public class RstController {
                 chatService.saveOne(chat);
                 messageService.saveOne(message1);
 
-                user.getLots().add(currentLot);
+                user.getChats().add(chat);
                 userService.addUser(user);
 
                 return "done";

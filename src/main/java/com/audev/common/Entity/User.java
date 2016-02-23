@@ -41,6 +41,8 @@ public class User {
     private String telephone;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private List<Lot> lots;
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "users")
+    private List<Chat> chats;
     //history
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
@@ -115,5 +117,13 @@ public class User {
 
     public void setLots(List<Lot> lots) {
         this.lots = lots;
+    }
+
+    public List<Chat> getChats() {
+        return chats;
+    }
+
+    public void setChats(List<Chat> chats) {
+        this.chats = chats;
     }
 }

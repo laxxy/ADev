@@ -33,7 +33,6 @@ import java.util.Properties;
 @EnableJpaRepositories("com.audev.common.Repository")
 public class DataConfig {
 
-    //for deploy
     @Value("${db.password}")
     private String PROP_DATABASE_PASSWORD;
     @Value("${db.username}")

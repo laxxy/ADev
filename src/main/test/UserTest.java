@@ -1,7 +1,12 @@
 import com.audev.common.Config.DataConfig;
+import com.audev.common.Entity.Enums.UserRole;
+import com.audev.common.Entity.SubCategory;
+import com.audev.common.Entity.User;
 import com.audev.common.Service.LotService;
 import com.audev.common.Service.MessageService;
+import com.audev.common.Service.SubCategoryService;
 import com.audev.common.Service.UserService;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +27,33 @@ public class UserTest {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private LotService lotService;
-    @Autowired
-    private MessageService messageService;
+
+    @Before
+    public void setup() {
+    }
 
     @Test
-    public void test() {
+    public void create() {
+        User user1 = new User();
+        User user2 = new User();
 
+        user1.setEmail("cosxtgx@gmail.com");
+        user1.setPassword("6422f4c40534db400e0278f7c62a79bfc40f3566");
+        user1.setLogin("laxxy");
+        user1.setUserRole(UserRole.USER);
+
+        user2.setEmail("asd@asd");
+        user2.setPassword("6422f4c40534db400e0278f7c62a79bfc40f3566");
+        user2.setLogin("inner");
+        user2.setUserRole(UserRole.USER);
+
+        userService.addUser(user1);
+        userService.addUser(user2);
+    }
+
+    @Test
+    public void get() {
+        System.out.println(userService.getUserByEmail("cosxtgx@gmail.com").getEmail());
+        System.out.println(userService.getUserByEmail("asd@asd").getEmail());
     }
 }

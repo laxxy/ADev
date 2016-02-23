@@ -184,6 +184,16 @@ public class MainController {
     }
 
 
+    /**
+     *
+     * @param lot ->
+     * @param bindingResult ->
+     * @param httpServletRequest -> used for subcategory value only
+     * @param image1\
+     * @param image2--> images
+     * @param image3/
+     * @return post result
+     */
     @Transactional
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     public String postNew(@Valid Lot lot,  BindingResult bindingResult,

@@ -46,7 +46,7 @@ public class Lot {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "lot")
-    private List<Chat> chats;
+    private Set<Chat> chats = new HashSet<>();
     @Column(name = "images")
     ArrayList<String> images;
 
@@ -132,11 +132,11 @@ public class Lot {
         this.user = user;
     }
 
-    public List<Chat> getChats() {
+    public Set<Chat> getChats() {
         return chats;
     }
 
-    public void setChats(List<Chat> chats) {
+    public void setChats(Set<Chat> chats) {
         this.chats = chats;
     }
 

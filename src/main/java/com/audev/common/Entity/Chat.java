@@ -1,11 +1,10 @@
 package com.audev.common.Entity;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.JoinColumnOrFormula;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by cosxt on 12.01.2016.
@@ -26,11 +25,17 @@ public class Chat {
     @Temporal(TemporalType.DATE)
     @Column(name = "start_date", nullable = false, length = 10)
     private Date startDate;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "chat_user", joinColumns = {
+            @JoinColumn(name = "ch_usr_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "user_id", nullable = false, updatable = false)})
+    private Set<User> users;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "chat")
     private List<Message> messages;
 
     public Chat(){
         messages = new ArrayList<>();
+        users = new HashSet<>();
         startDate = new Date();
     }
 
@@ -60,5 +65,13 @@ public class Chat {
 
     public long getId() {
         return id;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 }

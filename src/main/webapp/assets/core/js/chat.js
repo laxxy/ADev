@@ -62,3 +62,21 @@ function postMessage(message) {
         }
     });
 }
+
+function newChat(message) {
+    $.ajax({
+        type : "POST",
+        contentType : "application/json",
+        url : window.location.href,
+        data : JSON.stringify(message),
+        dataType : 'json',
+        success : function(data) {
+            //append returned val here
+        },
+        error : function(e) {
+        },
+        done : function(e) {
+            //console.log("DONE");
+        }
+    });
+}
