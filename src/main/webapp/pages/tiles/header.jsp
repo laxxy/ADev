@@ -1,6 +1,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="<c:url value="/assets/core/js/messcount.js"/> "></script>
+<script src="<c:url value="/assets/core/js/jquery.js"/>"></script>
 
 <header id="header"><!--header-->
   <div class="header_top"><!--header_top-->
@@ -11,7 +13,7 @@
             <ul class="nav nav-pills">
               <li><a href="#"><i class="fa fa-phone"></i> +0 00 00 00 000</a></li>
               <sec:authorize access="isAuthenticated()">
-                <li><a href="/conversations"><i class="fa fa-envelope"></i> Income messages : 0</a></li>
+                <li id="income"><a href="/conversations"><i class="fa fa-envelope"></i> Income messages : 0</a></li>
               </sec:authorize>
             </ul>
           </div>

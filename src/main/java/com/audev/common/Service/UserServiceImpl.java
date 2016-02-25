@@ -3,6 +3,7 @@ package com.audev.common.Service;
 import com.audev.common.Entity.User;
 import com.audev.common.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Cacheable(value = "User")
     public User getUserById(long id) {
         return userRepository.findOne(id);
     }
@@ -32,10 +34,12 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    @Cacheable(value = "User")
     public User getUserByName(String s) {
         return userRepository.findByLogin(s);
     }
 
+    @Cacheable(value = "User")
     public User getUserByEmail(String s) {
         return userRepository.findByEmail(s);
     }

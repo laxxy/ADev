@@ -13,7 +13,6 @@
   <title>Home | J-PLATFORM</title>
   <link href="<c:url value="/assets/core/css/bootstrap.min.css"/>" rel="stylesheet">
   <link href="<c:url value="/assets/core/css/font-awesome.min.css"/>" rel="stylesheet">
-  <link href="<c:url value="/assets/core/css/prettyPhoto.css"/>" rel="stylesheet">
   <link href="<c:url value="/assets/core/css/price-range.css"/>" rel="stylesheet">
   <link href="<c:url value="/assets/core/css/animate.css"/>" rel="stylesheet">
   <link href="<c:url value="/assets/core/css/main.css"/>" rel="stylesheet">

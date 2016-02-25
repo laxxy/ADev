@@ -79,7 +79,7 @@ public class DataConfig {
     @Bean
     public CacheManager cacheManager() {
 
-        return new ConcurrentMapCacheManager("Message");
+        return new ConcurrentMapCacheManager("Message", "User");
     }
 
     /**

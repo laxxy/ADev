@@ -25,7 +25,7 @@ public class Chat {
     @Temporal(TemporalType.DATE)
     @Column(name = "start_date", nullable = false, length = 10)
     private Date startDate;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "chat_user", joinColumns = {
             @JoinColumn(name = "ch_usr_id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "user_id", nullable = false, updatable = false)})

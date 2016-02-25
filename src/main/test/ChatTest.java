@@ -58,7 +58,6 @@ public class ChatTest {
 
         Chat chat = new Chat();
         chat.setLot(lot);
-        chat.setStartDate(new Date());
 
         chat.getUsers().add(user);
         chat.getUsers().add(anotherOne);
@@ -101,24 +100,28 @@ public class ChatTest {
     @Rollback(value = false)
     @Test
     public void get() {
-       List<Chat> list = userService.getUserByEmail("cosxtgx@gmail.com").getChats();
+        /*List<Chat> list = userService.getUserByEmail("cosxtgx@gmail.com").getChats();
         list.forEach(h -> {
             System.out.println("Inner chat: |||||||||");
+            System.out.println("Size : " + h.getMessages().size());
             h.getMessages().forEach(k -> {
                 System.out.print(k.getMessage());
                 System.out.println(k.getAuthor());
                 System.out.println();
             });
-        });
+        });*/
 
         List<Chat> list2 = userService.getUserByEmail("asd@asd").getChats();
-        list2.forEach(h -> {
+        /*list2.forEach(h -> {
             System.out.println("Inner chat: ||||||||");
+            System.out.println("Size : " + h.getMessages().size());
             h.getMessages().forEach(k -> {
                 System.out.print(k.getMessage());
                 System.out.println(" " + k.getAuthor());
                 System.out.println();
             });
         });
+        */
+        System.out.println(chatService.getOneById(5).getMessages());
     }
  }

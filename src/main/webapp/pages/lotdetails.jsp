@@ -13,7 +13,6 @@
   <title>Home | J-PLATFORM</title>
   <link href="<c:url value="/assets/core/css/bootstrap.min.css"/>" rel="stylesheet">
   <link href="<c:url value="/assets/core/css/font-awesome.min.css"/>" rel="stylesheet">
-  <link href="<c:url value="/assets/core/css/prettyPhoto.css"/>" rel="stylesheet">
   <link href="<c:url value="/assets/core/css/price-range.css"/>" rel="stylesheet">
   <link href="<c:url value="/assets/core/css/animate.css"/>" rel="stylesheet">
   <link href="<c:url value="/assets/core/css/main.css"/>" rel="stylesheet">
@@ -246,9 +245,9 @@
                 </div>
               </div>
             </div>
-
             <div class="tab-pane fade active in" id="sendMessage" >
-              <div class="col-sm-12">
+              <div id="result"></div>
+              <div class="col-sm-12" id="innerSendMessage">
                 <p><b>Write to Author</b></p>
 
                 <div class="form-group col-md-12">
@@ -256,10 +255,9 @@
                             rows="8" placeholder="Your Message Here"></textarea>
                 </div>
                 <div class="form-group col-md-12">
-                  <input type="submit" onclick="postMessage(document.getElementById('message').value)"
+                  <input type="submit" onclick="newChat(document.getElementById('message').value)"
                          class="btn btn-primary pull-right" value="Submit">
                 </div>
-                <div id="result"></div>
               </div>
             </div>
           </div>
@@ -271,6 +269,5 @@
 
 <tiles:insertDefinition name="footer"/>
 <script src="<c:url value="/assets/core/js/jquery.js"/>"></script>
-<script src="<c:url value="/assets/core/js/lotdetails.js"/>"></script>
 </body>
 </html>

@@ -5,7 +5,9 @@ import com.audev.common.Entity.Lot;
 import com.audev.common.Entity.Message;
 import com.audev.common.Entity.User;
 import com.audev.common.Service.*;
+import com.audev.common.View.UnreadedMessageView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +16,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.Callable;
 
 /**
@@ -37,6 +41,12 @@ public class RstController {
     @Autowired
     private UserService userService;
 
+    /**
+     *
+     * @param input -> input string (category select | search)
+     * @param num
+     * @return list with finded data
+     */
     @JsonView(Lot.Public.class)
     @Transactional
     @RequestMapping(value = "/filter/{input}")
@@ -60,7 +70,14 @@ public class RstController {
         }
     }
 
-    //TODO implement sec. here
+    /**
+     *
+     * @param id -> chat id
+     * @param size -> chat size
+     * @return messages after chat update
+     * @throws Exception
+     */
+    @PreAuthorize("hasRole('USER')")
     @JsonView(Message.PublicMessage.class)
     @RequestMapping(value = "/conversations/chat/{id}", method = RequestMethod.POST)
     public Callable<List<Message>> asyncMessage(@PathVariable String id, @RequestBody String size) throws Exception {
@@ -79,7 +96,36 @@ public class RstController {
         };
     }
 
-    //TODO implement sec. here
+    /**
+     *
+     * @return unread messages size
+     */
+    @JsonView(UnreadedMessageView.main.class)
+    @Transactional
+    @PreAuthorize("hasRole('USER')")
+    @RequestMapping(value = "/conversations/unreaded", method = RequestMethod.GET)
+    public UnreadedMessageView getUnreaded() {
+
+        final User user = getUserFromSession();
+        if (user.getChats() != null) {
+            final List<Chat> chats = user.getChats();
+            final int[] count = {0};
+            chats.forEach(o -> o.getMessages().forEach(k -> {
+                if (!Objects.equals(k.getAuthor(), user.getLogin()) && !k.isReaded())
+                    count[0]++;
+            }));
+            UnreadedMessageView un = new UnreadedMessageView(); un.setSize(count[0]);
+            return un;
+        }
+        return null;
+    }
+
+    /**
+     * Insert new message
+     * @param id - chat id
+     * @param incomeMessage - > income message
+     */
+    @PreAuthorize("hasRole('USER')")
     @RequestMapping(value = "/conversations/chat/{id}", method = RequestMethod.PUT)
     public void postMessage(@PathVariable String id, @RequestBody String incomeMessage) {
         Message message = new Message();
@@ -94,40 +140,43 @@ public class RstController {
         chatService.saveOne(chat);
     }
 
-    @RequestMapping(value = "/conversations", method = RequestMethod.POST)
-    public Callable<String> asyncMessageCheck() {
-
-        //List<Chat> =
-
-        return null;
-    }
-
+    /**
+     * Creates new chat
+     * @param lotid -> lot id
+     * @param message -> income message
+     * @return result
+     */
+    @PreAuthorize("hasRole('USER')")
     @RequestMapping(value = "/lot/{lotid}", method = RequestMethod.POST)
     public String newChat(@PathVariable String lotid, @RequestBody String message) {
 
         if (!lotid.isEmpty() && !message.isEmpty()) {
             Lot currentLot = lotService.getOne(Long.valueOf(lotid));
             User user = getUserFromSession();
-            //TODO rewrite to user -> chats
+            User autor = currentLot.getUser();
             if (user.getLots().contains(currentLot)){
                 return "Sorry, you cant write to yourself.";
             }
-            //TODO rewrite to user -> chats
             if (!user.getLots().contains(currentLot)) {
                 Chat chat = new Chat();
                 chat.getUsers().add(user);
-                Message message1 = new Message();
+                chat.getUsers().add(autor);
 
+                Message message1 = new Message();
                 message1.setAuthor(user.getLogin());
                 message1.setIsReaded(false);
                 message1.setMessage(message);
                 message1.setChat(chat);
 
+                currentLot.getChats().add(chat);
                 chat.setLot(currentLot);
                 chat.getMessages().add(message1);
                 chatService.saveOne(chat);
                 messageService.saveOne(message1);
+                lotService.addOne(currentLot);
 
+                //add this chat to lotAutor & writer
+                autor.getChats().add(chat);
                 user.getChats().add(chat);
                 userService.addUser(user);
 
@@ -138,6 +187,10 @@ public class RstController {
         return "Please, write something to do that.";
     }
 
+    /**
+     *
+     * @return user from current session
+     */
     private User getUserFromSession() {
         UserDetails userDetails;
         if (!SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {

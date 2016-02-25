@@ -11,7 +11,6 @@
   <title>Home | J-PLATFORM</title>
   <link href="<c:url value="/assets/core/css/bootstrap.min.css"/>" rel="stylesheet">
   <link href="<c:url value="/assets/core/css/font-awesome.min.css"/>" rel="stylesheet">
-  <link href="<c:url value="/assets/core/css/prettyPhoto.css"/>" rel="stylesheet">
   <link href="<c:url value="/assets/core/css/price-range.css"/>" rel="stylesheet">
   <link href="<c:url value="/assets/core/css/animate.css"/>" rel="stylesheet">
   <link href="<c:url value="/assets/core/css/main.css"/>" rel="stylesheet">
@@ -20,7 +19,6 @@
   <script src="<c:url value="/assets/core/js/bootstrap.min.js"/>"></script>
   <script src="<c:url value="/assets/core/js/jquery.scrollUp.min.js"/>"></script>
   <script src="<c:url value="/assets/core/js/price-range.js"/>"></script>
-  <script src="<c:url value="/assets/core/js/jquery.prettyPhoto.js"/>"></script>
   <script src="<c:url value="/assets/core/js/main.js"/>"></script>
   <script src="<c:url value="/assets/core/js/ajax.req.js"/>"></script>
   <script src="<c:url value="/assets/core/js/jquery.bootpag.min.js"/>"></script>

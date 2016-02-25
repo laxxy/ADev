@@ -41,7 +41,7 @@ public class User {
     private String telephone;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private List<Lot> lots;
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "users")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
     private List<Chat> chats;
     //history
     @Enumerated(EnumType.STRING)

@@ -71,12 +71,16 @@ function newChat(message) {
         data : JSON.stringify(message),
         dataType : 'json',
         success : function(data) {
-            //append returned val here
+            result(data);
         },
         error : function(e) {
         },
-        done : function(e) {
+        done : function(data) {
             //console.log("DONE");
         }
     });
+    function result(name) {
+        document.getElementById("innerSendMessage").remove();
+        $('#result').append('<input name="subname" value="'+name+'" readonly/>');
+    }
 }
