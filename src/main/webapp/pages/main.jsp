@@ -16,12 +16,7 @@
   <link href="<c:url value="/assets/core/css/main.css"/>" rel="stylesheet">
   <link href="<c:url value="/assets/core/css/responsive.css"/>" rel="stylesheet">
   <script src="<c:url value="/assets/core/js/jquery.js"/>"></script>
-  <script src="<c:url value="/assets/core/js/bootstrap.min.js"/>"></script>
-  <script src="<c:url value="/assets/core/js/jquery.scrollUp.min.js"/>"></script>
-  <script src="<c:url value="/assets/core/js/price-range.js"/>"></script>
-  <script src="<c:url value="/assets/core/js/main.js"/>"></script>
   <script src="<c:url value="/assets/core/js/ajax.req.js"/>"></script>
-  <script src="<c:url value="/assets/core/js/jquery.bootpag.min.js"/>"></script>
 </head><!--/head-->
 
 <body>
@@ -58,5 +53,10 @@
   </div>
 </section>
 <tiles:insertDefinition name="footer"/>
+<script src="<c:url value="/assets/core/js/jquery.bootpag.min.js"/>"></script>
+<script src="<c:url value="/assets/core/js/bootstrap.min.js"/>"></script>
+<script src="<c:url value="/assets/core/js/jquery.scrollUp.min.js"/>"></script>
+<script src="<c:url value="/assets/core/js/price-range.js"/>"></script>
+<script src="<c:url value="/assets/core/js/main.js"/>"></script>
 </body>
 </html>

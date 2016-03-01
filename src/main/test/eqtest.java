@@ -33,11 +33,6 @@ public class eqtest {
 
     @Test
     public void testeq() {
-
-        User user = userService.getUserByName("laxxy");
-        System.out.println("user " + user.getId() + " : name" + user.getLogin());
-
-
         //System.out.println(chatService.getChatsByUserId(1).size());
     }
 }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Created by cosxt on 01.12.2015.
+ * LotServiceImpl
  */
 
 @Service

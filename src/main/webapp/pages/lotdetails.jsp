@@ -269,5 +269,6 @@
 
 <tiles:insertDefinition name="footer"/>
 <script src="<c:url value="/assets/core/js/jquery.js"/>"></script>
+<script src="<c:url value="/assets/core/js/chat.js"/>"></script>
 </body>
 </html>

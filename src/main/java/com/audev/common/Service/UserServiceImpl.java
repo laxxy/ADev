@@ -5,11 +5,12 @@ import com.audev.common.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
- * Created by cosxt on 03.12.2015.
+ * UserService impl
  */
 @Service
 public class UserServiceImpl implements UserService {
@@ -34,12 +35,8 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
-    @Cacheable(value = "User")
-    public User getUserByName(String s) {
-        return userRepository.findByLogin(s);
-    }
-
-    @Cacheable(value = "User")
+    //no cache here cz -> throw LazyInitializationException
+    //use @Transactional to method
     public User getUserByEmail(String s) {
         return userRepository.findByEmail(s);
     }

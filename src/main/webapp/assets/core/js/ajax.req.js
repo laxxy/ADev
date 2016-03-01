@@ -35,6 +35,8 @@ function display(data) {
     var st = jQuery.parseJSON(data);
     var jmString = "";
     st.forEach(function(entry){
+        //var link = entry.images.get(0);
+        //alert(link);
         jmString = jmString +
             "<li class=media>" +
                 "<a class=pull-left href=/lot/" + entry.id  +">"+

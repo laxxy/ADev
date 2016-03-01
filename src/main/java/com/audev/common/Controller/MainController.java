@@ -2,6 +2,7 @@ package com.audev.common.Controller;
 
 import com.audev.common.Entity.Enums.UserRole;
 import com.audev.common.Entity.Lot;
+import com.audev.common.Entity.SubCategory;
 import com.audev.common.Entity.User;
 import com.audev.common.Service.CategoryService;
 import com.audev.common.Service.LotService;
@@ -16,6 +17,7 @@ import org.jets3t.service.model.S3Bucket;
 import org.jets3t.service.model.S3Object;
 import org.jets3t.service.security.AWSCredentials;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -169,10 +171,11 @@ public class MainController {
     }
 
     /**
-     *
-     * @param model
+     * Prints new lot page
+     * @param model -> insert val.
      * @return
      */
+    @PreAuthorize("!isAnonymous()")
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String newLot(Model model) {
 
@@ -194,6 +197,7 @@ public class MainController {
      * @param image3/
      * @return post result
      */
+    @PreAuthorize("!isAnonymous()")
     @Transactional
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     public String postNew(@Valid Lot lot,  BindingResult bindingResult,
@@ -207,6 +211,7 @@ public class MainController {
 
         ArrayList<String> images = new ArrayList<>();
 
+        //TODO Change file name to min. size
         if (!image1.isEmpty() && !image2.isEmpty() && !image3.isEmpty()) {
 
             try {
@@ -221,12 +226,13 @@ public class MainController {
             images.add(saveImage(image2, image2.getOriginalFilename()));
             images.add(saveImage(image3, image3.getOriginalFilename()));
         }
-        //TODO this throws Data truncation: Data too long for column 'images' at row 1
-        //but test work(
+        SubCategory sb = subCategoryService.getOneByName(httpServletRequest.getParameter("subname"));
         lot.setImages(images);
-        lot.setSubCategory(subCategoryService.getOneByName(httpServletRequest.getParameter("subname")));
+        lot.setSubCategory(sb);
         lot.setUser(getUserFromSession());
+        sb.getLots().add(lot);
         lotService.addOne(lot);
+        subCategoryService.saveOne(sb);
         return "newlot";
     }
 

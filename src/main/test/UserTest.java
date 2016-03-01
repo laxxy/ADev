@@ -14,6 +14,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by cosxt on 14.01.2016.
@@ -28,8 +29,11 @@ public class UserTest {
     @Autowired
     private UserService userService;
 
+    private User user;
+
     @Before
     public void setup() {
+        user = userService.getUserByEmail("cosxtgx@gmail.com");
     }
 
     @Test
@@ -51,9 +55,13 @@ public class UserTest {
         userService.addUser(user2);
     }
 
+    @Transactional
     @Test
     public void get() {
         System.out.println(userService.getUserByEmail("cosxtgx@gmail.com").getEmail());
         System.out.println(userService.getUserByEmail("asd@asd").getEmail());
+
+        //get chats
+        user.getChats().forEach(h -> System.out.println(h.getId()));
     }
 }

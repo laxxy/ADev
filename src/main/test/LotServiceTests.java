@@ -92,7 +92,7 @@ public class LotServiceTests {
     @Test
     @Transactional
     public void getTest() {
-        System.out.println(lotService.getOne(0).getId());
+        //System.out.println(lotService.getOne(0).getId());
         //System.out.println(lotService.getOneByName(""));
         lotService.getLastSix().forEach(h -> System.out.println(h.getId()));
     }

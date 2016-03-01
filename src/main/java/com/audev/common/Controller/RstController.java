@@ -77,7 +77,7 @@ public class RstController {
      * @return messages after chat update
      * @throws Exception
      */
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("!isAnonymous()")
     @JsonView(Message.PublicMessage.class)
     @RequestMapping(value = "/conversations/chat/{id}", method = RequestMethod.POST)
     public Callable<List<Message>> asyncMessage(@PathVariable String id, @RequestBody String size) throws Exception {
@@ -100,14 +100,14 @@ public class RstController {
      *
      * @return unread messages size
      */
-    @JsonView(UnreadedMessageView.main.class)
     @Transactional
-    @PreAuthorize("hasRole('USER')")
+    @JsonView(UnreadedMessageView.main.class)
+    @PreAuthorize("!isAnonymous()")
     @RequestMapping(value = "/conversations/unreaded", method = RequestMethod.GET)
     public UnreadedMessageView getUnreaded() {
 
         final User user = getUserFromSession();
-        if (user.getChats() != null) {
+        if (user != null && user.getChats() != null) {
             final List<Chat> chats = user.getChats();
             final int[] count = {0};
             chats.forEach(o -> o.getMessages().forEach(k -> {
@@ -125,7 +125,7 @@ public class RstController {
      * @param id - chat id
      * @param incomeMessage - > income message
      */
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("!isAnonymous()")
     @RequestMapping(value = "/conversations/chat/{id}", method = RequestMethod.PUT)
     public void postMessage(@PathVariable String id, @RequestBody String incomeMessage) {
         Message message = new Message();
@@ -146,7 +146,7 @@ public class RstController {
      * @param message -> income message
      * @return result
      */
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("!isAnonymous()")
     @RequestMapping(value = "/lot/{lotid}", method = RequestMethod.POST)
     public String newChat(@PathVariable String lotid, @RequestBody String message) {
 

@@ -23,6 +23,7 @@ import java.util.List;
  * Message processing
  *
  */
+@PreAuthorize("!isAnonymous()")
 @Controller
 @RequestMapping("/conversations")
 public class ChatController {
@@ -63,7 +64,6 @@ public class ChatController {
      * @param modelMap -> ins. attributes
      * @return chat page
      */
-    @PreAuthorize("hasRole('USER')")
     @RequestMapping(value = "/chat/{id}")
     public String printChat(@PathVariable String id, ModelMap modelMap) {
 

@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by cosxt on 16.12.2015.
+ * UserSecurityImpl
  */
 @Service
 public class UserSecurImpl implements UserDetailsService {

@@ -5,11 +5,10 @@ import com.audev.common.Entity.User;
 import java.util.List;
 
 /**
- * Created by cosxt on 03.12.2015.
+ * UserService
  */
 public interface UserService {
     public User getUserById(long id);
-    public User getUserByName(String s);
     public User getUserByEmail(String s);
     public List<User> getAllUsers();
     public void deleteUserById(long id);
